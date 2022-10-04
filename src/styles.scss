@@ -1,4 +1,68 @@
-/* You can add global styles to this file, and also import other style files */
-
 html, body { height: 100%; }
 body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
+
+html,
+body {
+    height: 100%;
+}
+
+body {
+    width: 100%;
+    margin: 0;
+    font-family: Roboto, "Helvetica Neue", sans-serif;
+    background-color: var(--color-basic);
+}
+
+.container {
+
+    &:first-child {
+        margin: auto;
+    }
+
+    .content-wrapper {
+        padding: 0 300px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+}
+
+.table-list {
+    width: 100%;
+    padding: 30px;
+
+    .table-list__priority_true {
+        text-align: center;
+        width: 40px;
+        height: 20px;
+        border-radius: 10px;
+        background-color: var(--color-accent);
+    }
+}
+
+.form-group {
+    display: flex;
+    flex-direction: column;
+    max-width: 400px;
+    border-radius: 30px;
+    border: 2px solid var(--color-accent);
+    background-color: var(--color-primary);
+    margin: 50px auto;
+    padding: 20px;
+
+    .mat-title__auth {
+        color: var(--color-accent);
+    }
+
+    &.is-phone {
+        margin: 30px 30px;
+    }
+}
+
+.form-group__modal {
+    background: none;
+    max-width: 300px;
+    border: none;
+    padding: 0;
+    margin: 0;
+}
