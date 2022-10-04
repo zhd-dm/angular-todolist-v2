@@ -1,0 +1,75 @@
+:root {
+
+	// Flex
+
+	.flex {
+		display: flex;
+	}
+
+	//----------------------------------//
+
+	// Justify content
+
+	.justify-center {
+		display: flex;
+		justify-content: center;
+	}
+
+	.justify-start {
+		display: flex;
+		justify-content: flex-start;
+	}
+
+	.justify-end {
+		display: flex;
+		justify-content: flex-end;
+	}
+
+	//----------------------------------//
+
+	// Align items
+
+	.align-center {
+		display: flex;
+		align-items: center;
+	}
+
+	.-align-flex-start {
+		display: flex;
+		align-items: flex-start;
+	}
+
+	.align-flex-end {
+		display: flex;
+		align-items: flex-end;
+	}
+
+	//----------------------------------//
+
+	// Justify content + ALign items
+
+	.justify-align-center {
+		display: flex;
+		justify-content: center;
+		align-items: center;
+	}
+
+	//----------------------------------//
+
+	// Colors
+
+	.primary {
+		background-color: var(--color-primary);
+		color: var(--color-white);
+	}
+
+	.accent {
+		background-color: var(--color-accent);
+		color: var(--color-basic);
+	}
+
+	.warn {
+		background-color: var(--color-warn);
+		color: var(--color-white);
+	}
+}
