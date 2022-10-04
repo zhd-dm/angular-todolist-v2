@@ -3,7 +3,8 @@ import { Router } from '@angular/router';
 // Services
 import { AuthService } from 'src/app/shared/services/auth.service';
 // Constants
-import { HEADER_CONSTANTS } from '../../constants/constants';
+import { ROUTER_AUTH_LINKS } from 'src/app/shared/constants/router-link.constants';
+import { HEADER_TEMPLATE_TEXT } from '../../constants/constants';
 
 @Component({
 	selector: 'ui-header',
@@ -13,7 +14,9 @@ import { HEADER_CONSTANTS } from '../../constants/constants';
 })
 export class HeaderComponent {
 
-	public HEADER_CONSTANTS = HEADER_CONSTANTS;
+	public TEMPLATE_TEXT = HEADER_TEMPLATE_TEXT;
+
+	public ROUTER_LINKS = ROUTER_AUTH_LINKS;
 
 	public isAuth$ = this.authService.isAuth$;
 
@@ -22,14 +25,8 @@ export class HeaderComponent {
 		private router: Router
 	) {}
 
-	public logIn(): void {
-		this.isAuth$.next(true);
-		this.router.navigate(['/login']);
-	}
-
-	public register(): void {
-		this.isAuth$.next(true);
-		this.router.navigate(['/register']);
+	public auth(link: string): void {
+		this.router.navigate([link]);
 	}
 
 	public logOut(): void {

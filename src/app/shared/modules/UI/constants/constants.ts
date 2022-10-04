@@ -1,4 +1,4 @@
-export const HEADER_CONSTANTS = {
+export const HEADER_TEMPLATE_TEXT = {
 	login: 'Login',
 	register: 'Registration',
 	logout: 'Logout',

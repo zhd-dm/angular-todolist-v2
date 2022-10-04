@@ -5,18 +5,18 @@
 			*ngIf="!(isAuth$ | async)"
 			class="header-wrapper__link primary"
 			mat-raised-button
-			(click)="logIn()"
+			(click)="auth(ROUTER_LINKS.login)"
 		>
-			{{ HEADER_CONSTANTS.login }}
+			{{ TEMPLATE_TEXT.login }}
 		</button>
 
 		<button
 			*ngIf="!(isAuth$ | async)"
 			class="header-wrapper__link primary"
 			mat-raised-button
-			(click)="register()"
+			(click)="auth(ROUTER_LINKS.register)"
 		>
-			{{ HEADER_CONSTANTS.register }}
+			{{ TEMPLATE_TEXT.register }}
 		</button>
 
 		<button
@@ -24,7 +24,7 @@
 			class="header-wrapper__link accent"
 			mat-raised-button
 		>
-			{{ HEADER_CONSTANTS.taskList }}
+			{{ TEMPLATE_TEXT.taskList }}
 		</button>
 
 		<button
@@ -33,7 +33,7 @@
 			mat-raised-button
 			(click)="logOut()"
 		>
-			{{ HEADER_CONSTANTS.logout }}
+			{{ TEMPLATE_TEXT.logout }}
 		</button>
 
 		<!-- <app-button-create-task class="header-wrapper__link"></app-button-create-task>
