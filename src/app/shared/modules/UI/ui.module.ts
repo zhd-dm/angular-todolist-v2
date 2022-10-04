@@ -1,19 +1,22 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-
+// Modules
 import { MaterialModule } from '../material/material.module';
-
-// components
+// Components
 import { HeaderComponent } from './components/header/header.component';
+// Directives
+import { UiSpinnerDirective } from './directives/ui-spinner.directive';
 
 
 
 @NgModule({
 	declarations: [
-		HeaderComponent
+		HeaderComponent,
+		UiSpinnerDirective
 	],
 	exports: [
-		HeaderComponent
+		HeaderComponent,
+		UiSpinnerDirective
 	],
 	imports: [
 		CommonModule,
