@@ -2,9 +2,6 @@
 @import './assets/css/sizes.scss';
 @import './assets/css/utils.scss';
 
-html, body { height: 100%; }
-body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
-
 html,
 body {
     height: 100%;
@@ -31,10 +28,8 @@ body {
 }
 
 .form-group {
-    display: flex;
-    flex-direction: column;
-    max-width: 400px;
-    border-radius: 30px;
+    max-width: 30%;
+    border-radius: 10px;
     border: 2px solid var(--color-accent);
     background-color: var(--color-primary);
     margin: 50px auto;
@@ -42,10 +37,6 @@ body {
 
     .mat-title__auth {
         color: var(--color-accent);
-    }
-
-    &.is-phone {
-        margin: 30px 30px;
     }
 }
 
