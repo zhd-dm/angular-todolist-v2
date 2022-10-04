@@ -1,0 +1,55 @@
+<header class="header-wrapper justify-align-center">
+	<div class="header-wrapper__content">
+
+		<button
+			*ngIf="!(isAuth$ | async)"
+			class="header-wrapper__link primary"
+			mat-raised-button
+			(click)="logIn()"
+		>
+			{{ HEADER_CONSTANTS.login }}
+		</button>
+
+		<button
+			*ngIf="!(isAuth$ | async)"
+			class="header-wrapper__link primary"
+			mat-raised-button
+			(click)="register()"
+		>
+			{{ HEADER_CONSTANTS.register }}
+		</button>
+
+		<button
+			*ngIf="isAuth$ | async"
+			class="header-wrapper__link accent"
+			mat-raised-button
+		>
+			{{ HEADER_CONSTANTS.taskList }}
+		</button>
+
+		<button
+			*ngIf="isAuth$ | async"
+			class="header-wrapper__link warn"
+			mat-raised-button
+			(click)="logOut()"
+		>
+			{{ HEADER_CONSTANTS.logout }}
+		</button>
+
+		<!-- <app-button-create-task class="header-wrapper__link"></app-button-create-task>
+		<app-button-create-category class="header-wrapper__link"></app-button-create-category> -->
+	</div>
+</header>
+
+    <!-- <ng-container *ngIf="false">
+        <header class="header-wrapper">
+            <div class="content-wrapper">
+                <a routerLink="/auth/login" class="header-wrapper__link">
+                    <button mat-raised-button color="primary">Login</button>
+                </a>
+                <a routerLink="/auth/registration" class="header-wrapper__link">
+                    <button mat-raised-button color="primary">Registration</button>
+                </a>
+            </div>
+        </header>
+    </ng-container> -->
