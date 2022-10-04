@@ -1,19 +1,37 @@
-<form
-	class="form-group form-group__auth form-group__auth_login"
->
+<!-- <div *uiSpinner="true"> -->
+	<form
+		class="form-group flex-column"
+		[formGroup]="form"
+	>
 
-    <div class="mat-title mat-title__auth">Log In</div>
-    <!-- <mat-error *ngIf="!isValidate.status">{{isValidate.message}}</mat-error> -->
-    <mat-form-field class="form-group__login_email" color="accent" appearance="outline">
-        <mat-label>Email</mat-label>
-        <input type="email" matInput formControlName="email" placeholder="Ex. pat@example.com">
-    </mat-form-field>
+		<div class="mat-title mat-title__auth">{{ TEMPLATE_TEXT.login }}</div>
+		<mat-form-field color="accent" appearance="outline">
+			<mat-label>{{ TEMPLATE_TEXT.email }}</mat-label>
+			<input
+				type="email"
+				matInput
+				formControlName="email"
+				[placeholder]="TEMPLATE_TEXT.emailPlaceholder">
+		</mat-form-field>
 
-    <mat-form-field class="form-group__login_password" color="accent" appearance="outline">
-        <mat-label>Password</mat-label>
-        <input type="password" matInput formControlName="password" placeholder="Password">
-    </mat-form-field>
+		<mat-form-field color="accent" appearance="outline">
+			<mat-label>{{ TEMPLATE_TEXT.password }}</mat-label>
+			<input
+				type="password"
+				matInput
+				formControlName="password"
+				[placeholder]="TEMPLATE_TEXT.password">
+		</mat-form-field>
 
-    <button type="submit" mat-raised-button color="accent">Log In</button>
+		<button
+			class="accent"
+			mat-raised-button
+			[disabled]="form.invalid"
+			(click)="logIn()"
+		>
+			{{ TEMPLATE_TEXT.login }}
+		</button>
 
-</form>
+	</form>
+
+<!-- </div> -->
