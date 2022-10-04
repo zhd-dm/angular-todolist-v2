@@ -1,11 +1,12 @@
 import { NgModule } from '@angular/core';
-import { CommonModule } from '@angular/common';
 // modules
 import { SharedModule } from 'src/app/shared/shared.module';
+import { AuthRoutingModule } from './auth-routing.module';
 // services
 import { AuthService } from '../../shared/services/auth.service';
 // components
-import { AuthPageComponent } from './pages/auth-page/auth-page.component';
+import { LoginPageComponent } from './pages/login-page/login-page.component';
+import { RegisterPageComponent } from './pages/register-page/register-page.component';
 import { LoginFormComponent } from './components/login-form/login-form.component';
 import { RegisterFormComponent } from './components/register-form/register-form.component';
 
@@ -13,12 +14,13 @@ import { RegisterFormComponent } from './components/register-form/register-form.
 
 @NgModule({
 	declarations: [
-		AuthPageComponent,
+		LoginPageComponent,
+		RegisterPageComponent,
 		LoginFormComponent,
 		RegisterFormComponent
 	],
 	imports: [
-		CommonModule,
+		AuthRoutingModule,
 		SharedModule
 	],
 	providers: [
