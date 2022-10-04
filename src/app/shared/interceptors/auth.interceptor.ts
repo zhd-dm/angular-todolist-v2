@@ -12,6 +12,8 @@ import { LocalStorageService } from '../services/local-storage.service';
 // Types
 import { User } from '../types/user.type';
 import { IValidate } from '../types/validate.type';
+// Utils
+import { generateIsValidateObj } from '../utils/utils';
 
 @Injectable()
 export class AuthInterceptor implements HttpInterceptor {
@@ -20,10 +22,10 @@ export class AuthInterceptor implements HttpInterceptor {
 
 	intercept(request: HttpRequest<unknown>, next: HttpHandler): Observable<HttpEvent<unknown>> {
 
-		if(request.url.indexOf('auth') >= 0) {
+		if(request.url.indexOf('auth') !== 0) {
 			switch(request.method) {
 			case 'GET': return this.getUsers(request.body as User);
-			case 'POST': return this.saveUser(request.body as User);
+			case 'POST': return this.registrationUser(request.body as User);
 			}
 		}
 
@@ -35,44 +37,41 @@ export class AuthInterceptor implements HttpInterceptor {
 		return of(new HttpResponse<IValidate>({ status: 200, body: isValidate }));
 	}
 
-	private saveUser(user: User): Observable<HttpEvent<IValidate>> {
+	private registrationUser(user: User): Observable<HttpEvent<IValidate>> {
 		const isValidate: IValidate = this.checkUser(user, true);
 		return of(new HttpResponse<IValidate>({ status: 200, body: isValidate }));
 	}
 
 	private checkUser(user: User, isRegister?: boolean): IValidate {
-		if(!this.localStorageService.getItem('users')) {
-			this.localStorageService.setItem('users', []);
-		}
-
+		this.checkForEmptyStorage('users');
 		const storage: User[] = this.localStorageService.getItem('users') as User[];
-		const validate = {} as IValidate;
+		let validate = {} as IValidate;
 
 		storage.forEach(item => {
 			if (!isRegister) {
 				if (user.email.toLowerCase() === item.email && user.password === item.password) {
 					localStorage.setItem('loggedIn', user.email.toLowerCase());
-					validate.status = true;
-					validate.message = 'Login success';
-					return;
+					validate = generateIsValidateObj(true, 'Login success');
 				} else {
-					validate.status = false;
-					validate.message = 'User not found!';
-					return;
+					validate = generateIsValidateObj(false, 'User not found!');
 				}
 			} else {
 				if (user.email.toLowerCase() === item.email) {
-					validate.status = false;
-					validate.message = 'Email is busy!';
-					return;
+					validate = generateIsValidateObj(false, 'Email is busy!');
 				} else {
-					validate.status = true;
-					validate.message = 'Registration success';
-					return;
+					storage.push(user);
+					this.localStorageService.setItem('users', storage);
+					validate = generateIsValidateObj(true, 'Registration success');
 				}
 			}
 		});
 
 		return validate;
+	}
+
+	private checkForEmptyStorage(key: string): void {
+		if(!this.localStorageService.getItem(key)) {
+			this.localStorageService.setItem(key, []);
+		}
 	}
 }
