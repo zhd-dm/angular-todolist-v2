@@ -3,3 +3,7 @@ export const AUTH_ROUTER_LINKS = {
 	login: '/auth/login',
 	register: '/auth/register'
 };
+
+export const TASKS_ROUTER_LINKS = {
+	tasksList: '/tasks'
+};

@@ -13,7 +13,7 @@ import { LocalStorageService } from '../services/local-storage.service';
 import { User } from '../types/user.type';
 import { IValidate } from '../types/validate.type';
 // Constants
-import { STORAGE_USERS } from '../constants/local-storage.constants';
+// import { STORAGE_USERS } from '../constants/local-storage.constants';
 // Utils
 import { generateIsValidateObj } from '../utils/utils';
 
@@ -46,35 +46,47 @@ export class AuthInterceptor implements HttpInterceptor {
 	}
 
 	private getUsers(): Observable<HttpEvent<User[]>> {
-		this.checkForEmptyStorage(STORAGE_USERS);
-		const storage: User[] = this.localStorageService.getItem(STORAGE_USERS) as User[];
+		this.checkForEmptyStorage('users');
+		const storage: User[] = this.localStorageService.getItem('users') as User[];
 		return of (new HttpResponse<User[]>({ status: 200, body: storage }));
 	}
 
 	private checkUser(user: User, isRegister?: boolean): IValidate {
-		this.checkForEmptyStorage(STORAGE_USERS);
-		const storage: User[] = this.localStorageService.getItem(STORAGE_USERS) as User[];
+		this.checkForEmptyStorage('users');
+		const storage: User[] = this.localStorageService.getItem('users') as User[];
 		let validate = {} as IValidate;
 
-		storage.forEach(item => {
+		if (storage.length > 0) {
+			storage.forEach(item => {
+				if (!isRegister) {
+					if (user.email.toLowerCase() === item.email && user.password === item.password) {
+						this.localStorageService.setItem('loggedIn', user.email.toLowerCase());
+						validate = generateIsValidateObj(true, 'Login success');
+					} else {
+						validate = generateIsValidateObj(false, 'User not found!');
+					}
+				} else {
+					if (user.email.toLowerCase() === item.email) {
+						validate = generateIsValidateObj(false, 'Email is busy!');
+					} else {
+						user.email.toLowerCase();
+						storage.push(user);
+						this.localStorageService.setItem('users', storage);
+						validate = generateIsValidateObj(true, 'Registration success');
+					}
+				}
+			});
+		} else {
 			if (!isRegister) {
-				if (user.email.toLowerCase() === item.email && user.password === item.password) {
-					localStorage.setItem('loggedIn', user.email.toLowerCase());
-					validate = generateIsValidateObj(true, 'Login success');
-				} else {
-					validate = generateIsValidateObj(false, 'User not found!');
-				}
+				validate = generateIsValidateObj(false, 'User not found!');
 			} else {
-				if (user.email.toLowerCase() === item.email) {
-					validate = generateIsValidateObj(false, 'Email is busy!');
-				} else {
-					user.email.toLocaleLowerCase();
-					storage.push(user);
-					this.localStorageService.setItem(STORAGE_USERS, storage);
-					validate = generateIsValidateObj(true, 'Registration success');
-				}
+				user.email.toLowerCase();
+				storage.push(user);
+				this.localStorageService.setItem('users', storage);
+				this.localStorageService.setItem('loggedIn', user.email.toLowerCase());
+				validate = generateIsValidateObj(true, 'Registration success');
 			}
-		});
+		}
 
 		return validate;
 	}

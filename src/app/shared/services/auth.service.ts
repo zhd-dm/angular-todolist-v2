@@ -6,7 +6,7 @@ import { ApiService } from './api.service';
 import { User } from '../types/user.type';
 import { IValidate } from '../types/validate.type';
 // Constants
-import { ApiUserNames, API_USERS, MethodNames } from '../constants/api.constants';
+import { ApiAuthNames, API_USERS, MethodNames } from '../constants/api.constants';
 
 @Injectable({
 	providedIn: 'root'
@@ -19,11 +19,11 @@ export class AuthService {
 	) {}
 
 	public logIn(user: User): Observable<IValidate> {
-		return this.apiService.sendRequest(MethodNames.post, `${API_USERS}${ApiUserNames.login}`, user) as Observable<IValidate>;
+		return this.apiService.sendRequest(MethodNames.post, `${API_USERS}${ApiAuthNames.login}`, user) as Observable<IValidate>;
 	}
 
 	public register(user: User): Observable<IValidate> {
-		return this.apiService.sendRequest(MethodNames.post, `${API_USERS}${ApiUserNames.register}`, user) as Observable<IValidate>;
+		return this.apiService.sendRequest(MethodNames.post, `${API_USERS}${ApiAuthNames.register}`, user) as Observable<IValidate>;
 	}
 
 	public getUsers(): Observable<User[]> {

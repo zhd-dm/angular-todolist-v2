@@ -1,8 +1,8 @@
-const BASE_URL = 'https://api';
+export const BASE_URL = 'http://localhost:4200';
 
-export const API_USERS = '/users';
+export const API_USERS = '/auth';
 
-export enum ApiUserNames {
+export enum ApiAuthNames {
 	login = '/login',
 	register = '/register',
 	update = '/update'
