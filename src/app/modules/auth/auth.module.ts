@@ -6,7 +6,6 @@ import { SharedModule } from 'src/app/shared/shared.module';
 import { AuthRoutingModule } from './auth-routing.module';
 // services
 import { AuthService } from '../../shared/services/auth.service';
-import { LocalStorageService } from 'src/app/shared/services/local-storage.service';
 // components
 import { LoginPageComponent } from './pages/login-page/login-page.component';
 import { RegisterPageComponent } from './pages/register-page/register-page.component';
@@ -29,8 +28,7 @@ import { RegisterFormComponent } from './components/register-form/register-form.
 		SharedModule
 	],
 	providers: [
-		AuthService,
-		LocalStorageService
+		AuthService
 	]
 })
 export class AuthModule { }
