@@ -1,5 +1,5 @@
-export const USERS = 'users';
+export const STORAGE_USERS = 'users';
 
-export const TASKS = 'tasks';
+export const STORAGE_TASKS = 'tasks';
 
-export const CATEGORIES = 'categories';
+export const STORAGE_CATEGORIES = 'categories';

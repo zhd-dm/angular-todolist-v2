@@ -1,1 +1,51 @@
-<h1>Register Form</h1>
+<form
+	class="form-group flex-column"
+	[formGroup]="form"
+>
+	<div class="mat-title mat-title__auth">{{ TEMPLATE_TEXT.register }}</div>
+
+	<mat-form-field color="accent" appearance="outline">
+		<mat-label>{{ TEMPLATE_TEXT.username }}</mat-label>
+		<input
+			type="text"
+			matInput
+			formControlName="username"
+			[placeholder]="TEMPLATE_TEXT.username">
+	</mat-form-field>
+
+	<mat-form-field color="accent" appearance="outline">
+		<mat-label>{{ TEMPLATE_TEXT.email }}</mat-label>
+		<input
+			type="email"
+			matInput
+			formControlName="email"
+			[placeholder]="TEMPLATE_TEXT.emailPlaceholder">
+	</mat-form-field>
+
+	<mat-form-field color="accent" appearance="outline">
+		<mat-label>{{ TEMPLATE_TEXT.password }}</mat-label>
+		<input
+			type="password"
+			matInput
+			formControlName="password"
+			[placeholder]="TEMPLATE_TEXT.password">
+	</mat-form-field>
+
+	<mat-form-field color="accent" appearance="outline">
+		<mat-label>{{ TEMPLATE_TEXT.repeatPassword }}</mat-label>
+		<input
+			type="password"
+			matInput
+			formControlName="repeatPassword"
+			[placeholder]="TEMPLATE_TEXT.repeatPassword">
+	</mat-form-field>
+
+	<button
+		class="accent"
+		mat-raised-button
+		[disabled]="form.invalid"
+		(click)="register()"
+	>
+		{{ TEMPLATE_TEXT.register }}
+	</button>
+</form>

@@ -12,6 +12,8 @@ import { LocalStorageService } from '../services/local-storage.service';
 // Types
 import { User } from '../types/user.type';
 import { IValidate } from '../types/validate.type';
+// Constants
+import { STORAGE_USERS } from '../constants/local-storage.constants';
 // Utils
 import { generateIsValidateObj } from '../utils/utils';
 
@@ -44,14 +46,14 @@ export class AuthInterceptor implements HttpInterceptor {
 	}
 
 	private getUsers(): Observable<HttpEvent<User[]>> {
-		this.checkForEmptyStorage('users');
-		const storage: User[] = this.localStorageService.getItem('users') as User[];
+		this.checkForEmptyStorage(STORAGE_USERS);
+		const storage: User[] = this.localStorageService.getItem(STORAGE_USERS) as User[];
 		return of (new HttpResponse<User[]>({ status: 200, body: storage }));
 	}
 
 	private checkUser(user: User, isRegister?: boolean): IValidate {
-		this.checkForEmptyStorage('users');
-		const storage: User[] = this.localStorageService.getItem('users') as User[];
+		this.checkForEmptyStorage(STORAGE_USERS);
+		const storage: User[] = this.localStorageService.getItem(STORAGE_USERS) as User[];
 		let validate = {} as IValidate;
 
 		storage.forEach(item => {
@@ -66,8 +68,9 @@ export class AuthInterceptor implements HttpInterceptor {
 				if (user.email.toLowerCase() === item.email) {
 					validate = generateIsValidateObj(false, 'Email is busy!');
 				} else {
+					user.email.toLocaleLowerCase();
 					storage.push(user);
-					this.localStorageService.setItem('users', storage);
+					this.localStorageService.setItem(STORAGE_USERS, storage);
 					validate = generateIsValidateObj(true, 'Registration success');
 				}
 			}

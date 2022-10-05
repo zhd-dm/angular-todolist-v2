@@ -3,7 +3,7 @@ import { Router } from '@angular/router';
 // Services
 import { AuthService } from 'src/app/shared/services/auth.service';
 // Constants
-import { ROUTER_AUTH_LINKS } from 'src/app/shared/constants/router-link.constants';
+import { AUTH_ROUTER_LINKS } from 'src/app/shared/constants/router-link.constants';
 import { HEADER_TEMPLATE_TEXT } from '../../constants/constants';
 
 @Component({
@@ -16,7 +16,7 @@ export class HeaderComponent {
 
 	public TEMPLATE_TEXT = HEADER_TEMPLATE_TEXT;
 
-	public ROUTER_LINKS = ROUTER_AUTH_LINKS;
+	public ROUTER_LINKS = AUTH_ROUTER_LINKS;
 
 	public isAuth$ = this.authService.isAuth$;
 
