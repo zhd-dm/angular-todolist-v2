@@ -24,7 +24,8 @@ export class AuthInterceptor implements HttpInterceptor {
 
 		if(request.url.indexOf('auth') !== 0) {
 			switch(request.method) {
-			case 'GET': return this.getUsers(request.body as User);
+			case 'GET': return this.getUsers();
+			// case 'POST': return this.loginUser(request.body as User);
 			case 'POST': return this.registrationUser(request.body as User);
 			}
 		}
@@ -32,14 +33,20 @@ export class AuthInterceptor implements HttpInterceptor {
 		return next.handle(request);
 	}
 
-	private getUsers(user: User): Observable<HttpEvent<IValidate>> {
-		const isValidate: IValidate = this.checkUser(user);
+	private loginUser(user: User): Observable<HttpEvent<IValidate>> {
+		const isValidate: IValidate = this.checkUser(user, true);
 		return of(new HttpResponse<IValidate>({ status: 200, body: isValidate }));
 	}
 
 	private registrationUser(user: User): Observable<HttpEvent<IValidate>> {
 		const isValidate: IValidate = this.checkUser(user, true);
 		return of(new HttpResponse<IValidate>({ status: 200, body: isValidate }));
+	}
+
+	private getUsers(): Observable<HttpEvent<User[]>> {
+		this.checkForEmptyStorage('users');
+		const storage: User[] = this.localStorageService.getItem('users') as User[];
+		return of (new HttpResponse<User[]>({ status: 200, body: storage }));
 	}
 
 	private checkUser(user: User, isRegister?: boolean): IValidate {

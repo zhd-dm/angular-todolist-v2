@@ -1,4 +1,4 @@
-export const ROUTER_AUTH_LINKS = {
+export const AUTH_ROUTER_LINKS = {
 	auth: '/auth',
 	login: '/auth/login',
 	register: '/auth/register'
