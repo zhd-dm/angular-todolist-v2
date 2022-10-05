@@ -24,19 +24,21 @@ export class AuthInterceptor implements HttpInterceptor {
 
 	intercept(request: HttpRequest<unknown>, next: HttpHandler): Observable<HttpEvent<unknown>> {
 
-		if(request.url.indexOf('auth') !== 0) {
-			switch(request.method) {
-			case 'GET': return this.getUsers();
-			// case 'POST': return this.loginUser(request.body as User);
-			case 'POST': return this.registrationUser(request.body as User);
+		if (request.url.includes('/auth')) {
+			if (request.url.includes('/login')) {
+				return this.loginUser(request.body as User);
+			} else if (request.url.includes('/register')) {
+				return this.registrationUser(request.body as User);
 			}
 		}
 
 		return next.handle(request);
 	}
 
+	// Auth
+
 	private loginUser(user: User): Observable<HttpEvent<IValidate>> {
-		const isValidate: IValidate = this.checkUser(user, true);
+		const isValidate: IValidate = this.checkUser(user);
 		return of(new HttpResponse<IValidate>({ status: 200, body: isValidate }));
 	}
 
@@ -45,51 +47,51 @@ export class AuthInterceptor implements HttpInterceptor {
 		return of(new HttpResponse<IValidate>({ status: 200, body: isValidate }));
 	}
 
-	private getUsers(): Observable<HttpEvent<User[]>> {
-		this.checkForEmptyStorage('users');
-		const storage: User[] = this.localStorageService.getItem('users') as User[];
-		return of (new HttpResponse<User[]>({ status: 200, body: storage }));
-	}
-
 	private checkUser(user: User, isRegister?: boolean): IValidate {
 		this.checkForEmptyStorage('users');
 		const storage: User[] = this.localStorageService.getItem('users') as User[];
-		let validate = {} as IValidate;
 
 		if (storage.length > 0) {
-			storage.forEach(item => {
+			for (let i = 0; i < storage.length; i++) {
 				if (!isRegister) {
-					if (user.email.toLowerCase() === item.email && user.password === item.password) {
-						this.localStorageService.setItem('loggedIn', user.email.toLowerCase());
-						validate = generateIsValidateObj(true, 'Login success');
+					if (user.email.toLowerCase() === storage[i].email && user.password === storage[i].password) {
+						this.localStorageService.setItem('loggedIn', user.id);
+						return generateIsValidateObj(true, 'Login success');
+					} else if (user.email.toLowerCase() === storage[i].email && user.password !== storage[i].password) {
+						return generateIsValidateObj(false, 'Incorrect password!');
 					} else {
-						validate = generateIsValidateObj(false, 'User not found!');
+						return generateIsValidateObj(false, 'User not found!');
 					}
 				} else {
-					if (user.email.toLowerCase() === item.email) {
-						validate = generateIsValidateObj(false, 'Email is busy!');
+					if (user.email.toLowerCase() === storage[i].email) {
+						return generateIsValidateObj(false, 'Email is busy!');
 					} else {
-						user.email.toLowerCase();
-						storage.push(user);
-						this.localStorageService.setItem('users', storage);
-						validate = generateIsValidateObj(true, 'Registration success');
+						return this.saveUser(user, storage);
 					}
 				}
-			});
+			}
 		} else {
 			if (!isRegister) {
-				validate = generateIsValidateObj(false, 'User not found!');
+				return generateIsValidateObj(false, 'User not found!');
 			} else {
-				user.email.toLowerCase();
-				storage.push(user);
-				this.localStorageService.setItem('users', storage);
-				this.localStorageService.setItem('loggedIn', user.email.toLowerCase());
-				validate = generateIsValidateObj(true, 'Registration success');
+				return this.saveUser(user, storage);
 			}
 		}
 
-		return validate;
+		// TS thinks he can't return
+		return {} as IValidate;
 	}
+
+	private saveUser(user: User, storage: User[]): IValidate {
+		user.email.toLowerCase();
+		user.id = Date.now();
+		storage.push(user);
+		this.localStorageService.setItem('users', storage);
+		this.localStorageService.setItem('loggedIn', user.id);
+		return generateIsValidateObj(true, 'Registration success');
+	}
+
+	//----------------------------------------------------------------------------//
 
 	private checkForEmptyStorage(key: string): void {
 		if(!this.localStorageService.getItem(key)) {
