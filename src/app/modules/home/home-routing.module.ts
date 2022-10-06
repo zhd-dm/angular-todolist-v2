@@ -1,13 +1,19 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 
-import { HomePageComponent } from './pages/home-page/home-page.component';
-
-
 const routes: Routes = [
 	{
 		path: '',
-		component: HomePageComponent
+		redirectTo: 'tasks',
+		pathMatch: 'full'
+	},
+	{
+		path: 'tasks',
+		loadChildren: () => import('../task/task.module').then(module => module.TaskModule)
+	},
+	{
+		path: 'categories',
+		loadChildren: () => import('../category/category.module').then(module => module.CategoryModule)
 	}
 ];
 
