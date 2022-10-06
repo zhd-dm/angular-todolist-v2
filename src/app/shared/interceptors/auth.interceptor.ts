@@ -25,6 +25,7 @@ export class AuthInterceptor implements HttpInterceptor {
 	intercept(request: HttpRequest<unknown>, next: HttpHandler): Observable<HttpEvent<unknown>> {
 
 		if (request.url.includes('/auth')) {
+			this.checkForEmptyStorage('users');
 			if (request.url.includes('/login')) {
 				return this.loginUser(request.body as User);
 			} else if (request.url.includes('/register')) {
@@ -48,7 +49,6 @@ export class AuthInterceptor implements HttpInterceptor {
 	}
 
 	private checkUser(user: User, isRegister?: boolean): IValidate {
-		this.checkForEmptyStorage('users');
 		const storage: User[] = this.localStorageService.getItem('users') as User[];
 
 		if (storage.length > 0) {

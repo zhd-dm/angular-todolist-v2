@@ -2,7 +2,7 @@
 	<table class="mat-elevation-z8 table-list"
 		mat-table
 		matSort
-		[dataSource]="data$">
+		[dataSource]="(data$ | async) || []">
 
 		<ng-container matColumnDef="id">
 			<th mat-header-cell *matHeaderCellDef mat-sort-header> {{ TEMPLATE_TEXT.id }} </th>

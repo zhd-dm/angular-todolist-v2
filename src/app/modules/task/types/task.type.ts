@@ -4,5 +4,6 @@ export type Task = {
 	deadline: string;
 	priority?: boolean;
 	category?: string;
-	owner?: string;
+	ownerId?: number;
+	isGeneral: boolean;
   }

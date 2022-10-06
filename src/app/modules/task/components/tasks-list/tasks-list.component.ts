@@ -1,5 +1,5 @@
 import { ChangeDetectionStrategy, Component, OnInit, ViewChild } from '@angular/core';
-import { take } from 'rxjs';
+import { BehaviorSubject, take } from 'rxjs';
 // Material
 import { MatDialog } from '@angular/material/dialog';
 import { MatSort } from '@angular/material/sort';
@@ -22,7 +22,7 @@ import { TASKS_LIST_TEMPLATE_TEXT } from '../../constants/template.constants';
 export class TasksListComponent implements OnInit {
 	public TEMPLATE_TEXT = TASKS_LIST_TEMPLATE_TEXT;
 
-	public data$ = new MatTableDataSource<Task[]>([]);
+	public data$ = new BehaviorSubject<MatTableDataSource<Task>>(new MatTableDataSource());
 
 	public displayedColumns: string[] = ['id', 'name', 'deadline', 'priority', 'category', 'settings'];
 
@@ -73,8 +73,8 @@ export class TasksListComponent implements OnInit {
 		this.taskService.getTasks()
 			.subscribe({
 				next: tasks => {
-					// this.data$. = tasks;
-					this.data$.sort = this.sort;
+					this.data$.next(new MatTableDataSource(tasks));
+					this.data$.value.sort = this.sort;
 				},
 				error: error => console.log(error)
 			});

@@ -15,19 +15,19 @@ export enum ApiAuthNames {
 	update = '/update'
 }
 
-export const API_TASKS = `${BASE_URL}/tasks`;
+export const API_TASKS = '/tasks';
 
 export enum ApiTaskNames {
-	get = 'get',
+	get = '/get',
 	create = '/create',
 	update = '/update',
 	delete = '/delete'
 }
 
-export const API_CATEGORIES = `${BASE_URL}/catogories`;
+export const API_CATEGORIES = '/catogories';
 
 export enum ApiCategoryNames {
-	get = 'get',
+	get = '/get',
 	create = '/create',
 	update = '/update',
 	delete = '/delete'
