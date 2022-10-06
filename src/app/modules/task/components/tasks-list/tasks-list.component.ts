@@ -1,5 +1,5 @@
 import { ChangeDetectionStrategy, Component, OnInit, ViewChild } from '@angular/core';
-import { BehaviorSubject, take } from 'rxjs';
+import { take } from 'rxjs';
 // Material
 import { MatDialog } from '@angular/material/dialog';
 import { MatSort } from '@angular/material/sort';
@@ -10,6 +10,8 @@ import { NotificationService } from 'src/app/shared/services/notification.servic
 import { TaskService } from '../../services/task.service';
 // Types
 import { Task } from '../../types/task.type';
+// Constants
+import { TASKS_LIST_TEMPLATE_TEXT } from '../../constants/template.constants';
 
 @Component({
 	selector: 'tasks-list',
@@ -18,6 +20,8 @@ import { Task } from '../../types/task.type';
 	changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class TasksListComponent implements OnInit {
+	public TEMPLATE_TEXT = TASKS_LIST_TEMPLATE_TEXT;
+
 	public data$ = new MatTableDataSource<Task[]>([]);
 
 	public displayedColumns: string[] = ['id', 'name', 'deadline', 'priority', 'category', 'settings'];

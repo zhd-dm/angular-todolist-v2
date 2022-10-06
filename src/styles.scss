@@ -21,14 +21,6 @@ body {
 .table-list {
     width: 100%;
     padding: 30px;
-
-    &__priority_true {
-        text-align: center;
-        width: 40px;
-        height: 20px;
-        border-radius: 10px;
-        background-color: var(--color-accent);
-    }
 }
 
 .form-group {
