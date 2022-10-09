@@ -63,19 +63,19 @@
 
 	//----------------------------------//
 
-	// Colors
+	// Buttons colors
 
-	.primary {
+	.btn-primary {
 		background-color: var(--color-primary);
 		color: var(--color-white);
 	}
 
-	.accent {
+	.btn-accent {
 		background-color: var(--color-accent);
 		color: var(--color-basic);
 	}
 
-	.warn {
+	.btn-warn {
 		background-color: var(--color-warn);
 		color: var(--color-white);
 	}
