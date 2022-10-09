@@ -1,5 +1,5 @@
-import { ChangeDetectionStrategy, Component, OnInit, ViewChild } from '@angular/core';
-import { BehaviorSubject, take, tap } from 'rxjs';
+import { ChangeDetectionStrategy, Component, OnDestroy, OnInit, ViewChild } from '@angular/core';
+import { BehaviorSubject, Subject, take, takeUntil } from 'rxjs';
 // Material
 import { MatDialog } from '@angular/material/dialog';
 import { MatSort } from '@angular/material/sort';
@@ -22,17 +22,18 @@ import { TASKS_LIST_TEMPLATE_TEXT } from '../../constants/template.constants';
 	styleUrls: ['./tasks-list.component.scss'],
 	changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class TasksListComponent implements OnInit {
+export class TasksListComponent implements OnInit, OnDestroy {
 	public TEMPLATE_TEXT = TASKS_LIST_TEMPLATE_TEXT;
 
 	public data$ = new BehaviorSubject<MatTableDataSource<Task>>(new MatTableDataSource());
 
 	public displayedColumns: string[] = ['id', 'name', 'deadline', 'priority', 'category', 'settings'];
 
-	@ViewChild(MatSort) sort: MatSort = new MatSort;
+	@ViewChild(MatSort) public sort: MatSort = new MatSort;
+
+	private destroy$ = new Subject();
 
 	constructor(
-		private dialogRef: MatDialog,
 		private loadingService: LoadingService,
 		private notificationService: NotificationService,
 		private eventBusService: EventBusService,
@@ -43,6 +44,11 @@ export class TasksListComponent implements OnInit {
 	ngOnInit(): void {
 		this.getTasks();
 		this.eventBusSubscribe();
+	}
+
+	ngOnDestroy(): void {
+		this.destroy$.next(false);
+		this.destroy$.complete();
 	}
 
 	public deleteTask(id: number): void {
@@ -89,12 +95,11 @@ export class TasksListComponent implements OnInit {
 	private eventBusSubscribe(): void {
 		this.eventBusService.on(EventType.CREATE_TASK)
 			.pipe(
-				take(1),
-				tap(() => {
-					this.dialog.open(CreateTaskModalComponent);
-				})
+				takeUntil(this.destroy$)
 			)
-			.subscribe();
+			.subscribe(() => {
+				this.dialog.open(CreateTaskModalComponent);
+			});
 	}
 
 }
