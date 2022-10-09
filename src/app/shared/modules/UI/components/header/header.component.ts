@@ -35,6 +35,6 @@ export class HeaderComponent {
 	}
 
 	public logOut(): void {
-		this.isAuth$.next(false);
+		this.authService.logOut();
 	}
 }
