@@ -1,0 +1,29 @@
+<form
+	[formGroup]="form"
+	class="form-group form-group__modal">
+    <div class="mat-title">{{ TEMPLATE_TEXT.createNewTask }}</div>
+
+    <mat-form-field color="accent" appearance="outline">
+        <mat-label>{{ TEMPLATE_TEXT.taskName }}</mat-label>
+        <input type="text" matInput formControlName="name" [placeholder]="TEMPLATE_TEXT.taskName">
+    </mat-form-field>
+
+    <mat-form-field color="accent" appearance="outline">
+        <mat-label>{{ TEMPLATE_TEXT.deadline }}</mat-label>
+        <input type="text" matInput formControlName="deadline" [matDatepicker]="picker">
+        <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+        <mat-datepicker #picker></mat-datepicker>
+    </mat-form-field>
+
+    <mat-form-field color="accent" appearance="outline">
+        <mat-label>{{ TEMPLATE_TEXT.category }}</mat-label>
+        <mat-select formControlName="category">
+            <mat-option>{{ TEMPLATE_TEXT.nothing }}</mat-option>
+            <mat-option *ngFor="let category of categories$ | async" value={{category.name}}>{{category.name}}</mat-option>
+        </mat-select>
+    </mat-form-field>
+
+	<mat-checkbox formControlName="priority" class="example-margin">{{ TEMPLATE_TEXT.priority }}</mat-checkbox>
+
+    <button type="submit" class="btn-accent" mat-raised-button (click)="createTask()">Create</button>
+</form>
