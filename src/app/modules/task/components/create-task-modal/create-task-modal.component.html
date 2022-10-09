@@ -1,6 +1,6 @@
 <form
 	[formGroup]="form"
-	class="form-group form-group__modal">
+	class="form-group form-group__modal flex-column">
     <div class="mat-title">{{ TEMPLATE_TEXT.createNewTask }}</div>
 
     <mat-form-field color="accent" appearance="outline">
@@ -25,5 +25,5 @@
 
 	<mat-checkbox formControlName="priority" class="example-margin">{{ TEMPLATE_TEXT.priority }}</mat-checkbox>
 
-    <button type="submit" class="btn-accent" mat-raised-button (click)="createTask()">Create</button>
+    <button type="submit" class="btn-accent" mat-raised-button (click)="createTask()" [disabled]="form.invalid">Create</button>
 </form>

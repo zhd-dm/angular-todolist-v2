@@ -94,11 +94,15 @@ export class TasksListComponent implements OnInit, OnDestroy {
 
 	private eventBusSubscribe(): void {
 		this.eventBusService.on(EventType.CREATE_TASK)
-			.pipe(
-				takeUntil(this.destroy$)
-			)
+			.pipe(takeUntil(this.destroy$))
 			.subscribe(() => {
 				this.dialog.open(CreateTaskModalComponent);
+			});
+
+		this.eventBusService.on(EventType.UPDATE_TASK_LIST)
+			.pipe(takeUntil(this.destroy$))
+			.subscribe(() => {
+				this.getTasks();
 			});
 	}
 

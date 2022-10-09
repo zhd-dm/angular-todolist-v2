@@ -1,14 +1,17 @@
 import { ChangeDetectionStrategy, Component } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
+import { MatDialogRef } from '@angular/material/dialog';
 import { take } from 'rxjs';
 // Services
 import { LoadingService } from 'src/app/shared/services/loading.service';
 import { NotificationService } from 'src/app/shared/services/notification.service';
+import { EventBusService } from 'src/app/shared/modules/event-bus/event-bus.service';
 import { TaskService } from '../../services/task.service';
 import { CategoryService } from 'src/app/modules/category/services/category.service';
 // Types
 import { Task } from '../../types/task.type';
+import { EventType } from 'src/app/shared/modules/event-bus/types';
 // Constants
 import { TASKS_ROUTER_LINKS } from 'src/app/shared/constants/router-link.constants';
 import { CREATE_TASK_MODAL_TEMPLATE_TEXT } from '../../constants/template.constants';
@@ -33,8 +36,10 @@ export class CreateTaskModalComponent {
 
 	constructor(
 		private router: Router,
+		private dialogRef: MatDialogRef<CreateTaskModalComponent>,
 		private loadingService: LoadingService,
 		private notificationService: NotificationService,
+		private eventBusService: EventBusService,
 		private taskService: TaskService,
 		private categoryService: CategoryService
 	) {}
@@ -48,7 +53,9 @@ export class CreateTaskModalComponent {
 				this.notificationService.openSnackBar(response.message || '');
 				if (response.status) {
 					this.router.navigate([TASKS_ROUTER_LINKS.tasksList]);
+					this.eventBusService.push({ type: EventType.UPDATE_TASK_LIST });
 				}
 			});
+		this.dialogRef.close();
 	}
 }
