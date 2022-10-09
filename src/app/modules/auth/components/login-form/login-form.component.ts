@@ -34,15 +34,17 @@ export class LoginFormComponent {
 	) {}
 
 	public logIn(): void {
-		this.loadingService.loading$.next(true);
+		this.loadingService.startLoad();
 		this.authService.logIn(this.form.value as User)
 			.pipe(take(1))
 			.subscribe(response => {
-				this.loadingService.loading$.next(false);
+				this.loadingService.stopLoad();
 				this.notificationService.openSnackBar(response.message || '');
-				this.router.navigate([TASKS_ROUTER_LINKS.tasksList]);
+				if (response.status) {
+					this.router.navigate([TASKS_ROUTER_LINKS.tasksList]);
+				}
 			}, error => {
-				this.loadingService.loading$.next(false);
+				this.loadingService.stopLoad();
 				console.error(error);
 			});
 	}
