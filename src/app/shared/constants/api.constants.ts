@@ -24,7 +24,7 @@ export enum ApiTaskNames {
 	delete = '/delete'
 }
 
-export const API_CATEGORIES = '/catogories';
+export const API_CATEGORIES = '/categories';
 
 export enum ApiCategoryNames {
 	get = '/get',
