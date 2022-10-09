@@ -58,6 +58,7 @@ export class TasksListComponent implements OnInit, OnDestroy {
 				next: response => {
 					this.loadingService.loading$.next(false);
 					this.notificationService.openSnackBar(response.message || '');
+					this.getTasks();
 				},
 				error: error => {
 					this.loadingService.loading$.next(false);

@@ -30,7 +30,8 @@ export class TaskInterceptor implements HttpInterceptor {
 			} else if (request.url.includes('/update')) {
 				return this.updateTask(request.body as Task);
 			} else if (request.url.includes('/delete')) {
-				return this.deleteTask(request.body as number);
+				const id = +request.url.split('?')[1];
+				return this.deleteTask(id);
 			}
 		}
 
@@ -48,23 +49,18 @@ export class TaskInterceptor implements HttpInterceptor {
 	private createTask(task: Task): Observable<HttpEvent<IValidate>> {
 		const loggedIn = this.localStorageService.getItem('loggedIn') as number;
 		const storage = this.localStorageService.getItem('tasks') as Task[];
-
 		task.id = Date.now();
 		task.ownerId = loggedIn;
-
 		storage.push(task);
 		this.localStorageService.setItem('tasks', storage);
-
 		return of(new HttpResponse<IValidate>({ status: 200, body: generateIsValidateObj(true, 'Task created success') }));
 	}
 
 	private updateTask(task: Task): Observable<HttpEvent<IValidate>> {
 		const storage = this.localStorageService.getItem('tasks') as Task[];
 		const index = storage.findIndex(storageTask => storageTask.id === task.id);
-
 		storage[index] = task;
 		this.localStorageService.setItem('tasks', storage);
-
 		return of(new HttpResponse<IValidate>({ status: 200, body: generateIsValidateObj(true, 'Task updated success') }));
 	}
 
@@ -72,6 +68,7 @@ export class TaskInterceptor implements HttpInterceptor {
 		const storage = this.localStorageService.getItem('tasks') as Task[];
 		const index = storage.findIndex(task => task.id === id);
 		storage.splice(index, 1);
+		this.localStorageService.setItem('tasks', storage);
 		return of(new HttpResponse<IValidate>({ status: 200, body: generateIsValidateObj(true, 'Task deleted success') }));
 	}
 
