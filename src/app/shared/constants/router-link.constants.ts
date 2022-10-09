@@ -7,3 +7,7 @@ export const AUTH_ROUTER_LINKS = {
 export const TASKS_ROUTER_LINKS = {
 	tasksList: '/tasks'
 };
+
+export const CATEGORIES_ROUTER_LINKS = {
+	categoriesList: '/categories'
+};
