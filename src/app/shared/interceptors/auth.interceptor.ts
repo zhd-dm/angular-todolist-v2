@@ -63,7 +63,7 @@ export class AuthInterceptor implements HttpInterceptor {
 						return generateIsValidateObj(false, 'User not found!');
 					}
 				} else {
-					if (user.email.toLowerCase() === storage[i].email) {
+					if (storage.find(item => user.email.toLowerCase() === item.email)) {
 						return generateIsValidateObj(false, 'Email is busy!');
 					} else {
 						return this.saveUser(user, storage);
