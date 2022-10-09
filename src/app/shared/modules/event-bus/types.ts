@@ -1,6 +1,6 @@
 export enum EventType {
-	EVENT_CREATE_TASK = 'openModalCreateTask',
-	EVENT_CREATE_CATEGORY = 'modalCreateCategory'
+	CREATE_TASK = 'openModalCreateTask',
+	CREATE_CATEGORY = 'openModalCreateCategory'
 }
 
 export interface BusEvent<T = any> {
