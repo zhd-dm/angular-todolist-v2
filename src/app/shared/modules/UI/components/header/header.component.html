@@ -16,18 +16,18 @@
 				{{ TEMPLATE_TEXT.register }}
 			</button>
 		</ng-container>
-			<button mat-raised-button class="btn-accent" (click)="eventBusService.push({ type: EventType.CREATE_TASK })">
-				<mat-icon color="primary">add icon</mat-icon>
-			</button>
-			<button mat-raised-button class="btn-accent" (click)="eventBusService.push({ type: EventType.CREATE_CATEGORY })">
-				<mat-icon color="primary">library_add</mat-icon>
-			</button>
 		<ng-container *ngIf="isAuth$ | async">
 			<button
 				class="header-wrapper__link btn-accent"
 				mat-raised-button
 			>
 				{{ TEMPLATE_TEXT.taskList }}
+			</button>
+			<button mat-raised-button class="btn-accent" (click)="eventBusService.push({ type: EventType.CREATE_TASK })">
+				<mat-icon color="primary">add icon</mat-icon>
+			</button>
+			<button mat-raised-button class="btn-accent" (click)="eventBusService.push({ type: EventType.CREATE_CATEGORY })">
+				<mat-icon color="primary">library_add</mat-icon>
 			</button>
 			<button
 				class="header-wrapper__link btn-warn"

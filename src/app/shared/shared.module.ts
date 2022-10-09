@@ -8,6 +8,8 @@ import { AuthInterceptor } from './interceptors/auth.interceptor';
 import { TaskInterceptor } from './interceptors/task.interceptor';
 // Services
 import { LocalStorageService } from './services/local-storage.service';
+import { NotificationService } from './services/notification.service';
+import { ApiService } from './services/api.service';
 
 
 
@@ -23,6 +25,8 @@ import { LocalStorageService } from './services/local-storage.service';
 	],
 	providers: [
 		LocalStorageService,
+		NotificationService,
+		ApiService,
 		{
 			provide: HTTP_INTERCEPTORS,
 			useClass: AuthInterceptor,

@@ -4,14 +4,12 @@ import { Observable } from 'rxjs';
 // Constants
 import { BASE_URL, MethodNames } from '../constants/api.constants';
 
-@Injectable({
-	providedIn: 'root'
-})
+@Injectable()
 export class ApiService {
 
 	constructor(
 		private http: HttpClient
-	) { }
+	) {}
 
 	public sendRequest(method: MethodNames, url: string, body?: unknown): Observable<unknown> {
 		switch(method) {

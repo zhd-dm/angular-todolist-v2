@@ -4,9 +4,6 @@ import { CommonModule } from '@angular/common';
 // Modules
 import { SharedModule } from 'src/app/shared/shared.module';
 import { AuthRoutingModule } from './auth-routing.module';
-// Services
-import { AuthService } from '../../shared/services/auth.service';
-import { NotificationService } from 'src/app/shared/services/notification.service';
 // Components
 import { LoginPageComponent } from './pages/login-page/login-page.component';
 import { RegisterPageComponent } from './pages/register-page/register-page.component';
@@ -27,10 +24,6 @@ import { RegisterFormComponent } from './components/register-form/register-form.
 		ReactiveFormsModule,
 		AuthRoutingModule,
 		SharedModule
-	],
-	providers: [
-		AuthService,
-		NotificationService
 	]
 })
 export class AuthModule { }
