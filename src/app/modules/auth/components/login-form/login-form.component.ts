@@ -1,11 +1,17 @@
 import { ChangeDetectionStrategy, Component } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
+import { Router } from '@angular/router';
+import { take } from 'rxjs';
 // Services
 import { AuthService } from 'src/app/shared/services/auth.service';
+import { LoadingService } from 'src/app/shared/services/loading.service';
+import { NotificationService } from 'src/app/shared/services/notification.service';
 // Types
 import { User } from 'src/app/shared/types/user.type';
+import { IValidate } from 'src/app/shared/types/validate.type';
 // Constants
 import { LOGIN_TEMPLATE_TEXT } from '../../constants/template.constants';
+import { TASKS_ROUTER_LINKS } from 'src/app/shared/constants/router-link.constants';
 
 @Component({
 	selector: 'login-form',
@@ -22,10 +28,27 @@ export class LoginFormComponent {
 	});
 
 	constructor(
-		private authService: AuthService
+		private router: Router,
+		private authService: AuthService,
+		private loadingService: LoadingService,
+		private notificationService: NotificationService
 	) {}
 
 	public logIn(): void {
-		this.authService.logIn(this.form.value as User);
+		this.authService.logIn(this.form.value as User)
+			.pipe(take(1))
+			.subscribe({
+				next: res => {
+					this.loadingService.stopLoad();
+					this.notificationService.openSnackBar((res as IValidate).message);
+					if ((res as IValidate).status) {
+						this.authService.isAuth$.next(true);
+						this.router.navigate([TASKS_ROUTER_LINKS.tasksList]);
+					}
+				},
+				error: () => {
+					this.loadingService.stopLoad();
+				}
+			});
 	}
 }
