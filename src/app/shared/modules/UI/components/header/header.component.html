@@ -1,55 +1,41 @@
 <header class="header-wrapper justify-align-center">
 	<div class="header-wrapper__content">
-
-		<button
-			*ngIf="!(isAuth$ | async)"
-			class="header-wrapper__link primary"
-			mat-raised-button
-			(click)="auth(ROUTER_LINKS.login)"
-		>
-			{{ TEMPLATE_TEXT.login }}
-		</button>
-
-		<button
-			*ngIf="!(isAuth$ | async)"
-			class="header-wrapper__link primary"
-			mat-raised-button
-			(click)="auth(ROUTER_LINKS.register)"
-		>
-			{{ TEMPLATE_TEXT.register }}
-		</button>
-
-		<button
-			*ngIf="isAuth$ | async"
-			class="header-wrapper__link accent"
-			mat-raised-button
-		>
-			{{ TEMPLATE_TEXT.taskList }}
-		</button>
-
-		<button
-			*ngIf="isAuth$ | async"
-			class="header-wrapper__link warn"
-			mat-raised-button
-			(click)="logOut()"
-		>
-			{{ TEMPLATE_TEXT.logout }}
-		</button>
-
-		<!-- <app-button-create-task class="header-wrapper__link"></app-button-create-task>
-		<app-button-create-category class="header-wrapper__link"></app-button-create-category> -->
+		<ng-container *ngIf="!(isAuth$ | async)">
+			<button
+				class="header-wrapper__link primary"
+				mat-raised-button
+				(click)="auth(ROUTER_LINKS.login)"
+			>
+				{{ TEMPLATE_TEXT.login }}
+			</button>
+			<button
+				class="header-wrapper__link primary"
+				mat-raised-button
+				(click)="auth(ROUTER_LINKS.register)"
+			>
+				{{ TEMPLATE_TEXT.register }}
+			</button>
+		</ng-container>
+			<button mat-raised-button class="accent" (click)="eventBusService.push({ type: EventType.EVENT_CREATE_TASK })">
+				<mat-icon color="primary">add icon</mat-icon>
+			</button>
+			<button mat-raised-button color="accent" class="accent" (click)="eventBusService.push({ type: EventType.EVENT_CREATE_CATEGORY })">
+				<mat-icon color="primary">library_add</mat-icon>
+			</button>
+		<ng-container *ngIf="isAuth$ | async">
+			<button
+				class="header-wrapper__link accent"
+				mat-raised-button
+			>
+				{{ TEMPLATE_TEXT.taskList }}
+			</button>
+			<button
+				class="header-wrapper__link warn"
+				mat-raised-button
+				(click)="logOut()"
+			>
+				{{ TEMPLATE_TEXT.logout }}
+			</button>
+		</ng-container>
 	</div>
 </header>
-
-    <!-- <ng-container *ngIf="false">
-        <header class="header-wrapper">
-            <div class="content-wrapper">
-                <a routerLink="/auth/login" class="header-wrapper__link">
-                    <button mat-raised-button color="primary">Login</button>
-                </a>
-                <a routerLink="/auth/registration" class="header-wrapper__link">
-                    <button mat-raised-button color="primary">Registration</button>
-                </a>
-            </div>
-        </header>
-    </ng-container> -->
