@@ -7,10 +7,11 @@ import { SharedModule } from 'src/app/shared/shared.module';
 // Components
 import { TasksPageComponent } from './pages/tasks-page/tasks-page.component';
 import { TasksListComponent } from './components/tasks-list/tasks-list.component';
+import { CreateTaskModalComponent } from './components/create-task-modal/create-task-modal.component';
 // Services
 import { TaskService } from './services/task.service';
+import { CategoryService } from '../category/services/category.service';
 import { NotificationService } from 'src/app/shared/services/notification.service';
-import { CreateTaskModalComponent } from './components/create-task-modal/create-task-modal.component';
 
 
 
@@ -28,6 +29,7 @@ import { CreateTaskModalComponent } from './components/create-task-modal/create-
 	],
 	providers: [
 		TaskService,
+		CategoryService,
 		NotificationService
 	]
 })
