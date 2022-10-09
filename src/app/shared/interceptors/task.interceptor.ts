@@ -11,7 +11,7 @@ import { Observable, of } from 'rxjs';
 import { LocalStorageService } from 'src/app/shared/services/local-storage.service';
 // Types
 import { IValidate } from 'src/app/shared/types/validate.type';
-import { Task } from './types/task.type';
+import { Task } from '../../modules/task/types/task.type';
 // Utils
 import { generateIsValidateObj } from 'src/app/shared/utils/utils';
 

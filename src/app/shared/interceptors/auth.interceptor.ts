@@ -55,7 +55,7 @@ export class AuthInterceptor implements HttpInterceptor {
 			for (let i = 0; i < storage.length; i++) {
 				if (!isRegister) {
 					if (user.email.toLowerCase() === storage[i].email && user.password === storage[i].password) {
-						this.localStorageService.setItem('loggedIn', user.id);
+						this.localStorageService.setItem('loggedIn', storage[i].id);
 						return generateIsValidateObj(true, 'Login success');
 					} else if (user.email.toLowerCase() === storage[i].email && user.password !== storage[i].password) {
 						return generateIsValidateObj(false, 'Incorrect password!');

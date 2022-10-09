@@ -1,4 +1,4 @@
-export type IValidate = {
+export interface IValidate {
 	status: boolean;
 	message?: string;
 }

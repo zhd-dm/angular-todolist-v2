@@ -5,6 +5,7 @@ import { MaterialModule } from './modules/material/material.module';
 import { UIModule } from './modules/UI/ui.module';
 // Interceptors
 import { AuthInterceptor } from './interceptors/auth.interceptor';
+import { TaskInterceptor } from './interceptors/task.interceptor';
 // Services
 import { LocalStorageService } from './services/local-storage.service';
 
@@ -25,6 +26,11 @@ import { LocalStorageService } from './services/local-storage.service';
 		{
 			provide: HTTP_INTERCEPTORS,
 			useClass: AuthInterceptor,
+			multi: true
+		},
+		{
+			provide: HTTP_INTERCEPTORS,
+			useClass: TaskInterceptor,
 			multi: true
 		}
 	]
