@@ -5,6 +5,7 @@ export enum EventType {
 	UPDATE_CATEGORY_LIST = 'updateCategosyList'
 }
 
+/* eslint-disable */
 export interface BusEvent<T = any> {
 	type: EventType;
 	payload?: T;

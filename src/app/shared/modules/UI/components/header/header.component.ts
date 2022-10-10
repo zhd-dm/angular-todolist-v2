@@ -35,7 +35,7 @@ export class HeaderComponent {
 
 	public logOut(): void {
 		this.authService.logOut();
-		this.router.navigate([ROUTER_LINKS.home]);
+		this.goTo(ROUTER_LINKS.home);
 	}
 
 	public goTo(link: string): void {

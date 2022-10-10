@@ -12,6 +12,7 @@ export class EventBusService {
 	 * Subscribe to event
 	 * @param type - event type
 	 */
+	/* eslint-disable */
 	public on<T = any>(type: EventType): Observable<T> {
 		return this._eventSubject.pipe(
 			filter(event => event.type === type),
