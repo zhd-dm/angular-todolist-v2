@@ -1,0 +1,44 @@
+import { ChangeDetectionStrategy, Component, Inject } from '@angular/core';
+import { take } from 'rxjs';
+import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
+// Services
+import { TaskService } from '../../services/task.service';
+import { LoadingService } from 'src/app/shared/services/loading.service';
+import { NotificationService } from 'src/app/shared/services/notification.service';
+// Constants
+import { DELETE_TASK_MODAL_TEMPLATE_TEXT } from '../../constants/template.constants';
+
+@Component({
+	selector: 'app-delete-task-modal',
+	templateUrl: './delete-task-modal.component.html',
+	styleUrls: ['./delete-task-modal.component.scss'],
+	changeDetection: ChangeDetectionStrategy.OnPush
+})
+export class DeleteTaskModalComponent {
+	public TEMPLATE_TEXT = DELETE_TASK_MODAL_TEMPLATE_TEXT;
+
+	constructor(
+		private dialogRef: MatDialogRef<DeleteTaskModalComponent>,
+		@Inject(MAT_DIALOG_DATA) public data: { id: number },
+		private taskService: TaskService,
+		private loadingService: LoadingService,
+		private notificationService: NotificationService
+	) {}
+
+	public deleteTask(): void {
+		this.taskService.deleteTask(this.data.id)
+			.pipe(take(1))
+			.subscribe({
+				next: response => {
+					this.dialogRef.close();
+					this.loadingService.loading$.next(false);
+					this.notificationService.openSnackBar(response.message || '');
+				},
+				error: error => {
+					this.dialogRef.close();
+					this.loadingService.loading$.next(false);
+					console.error(error);
+				}
+			});
+	}
+}

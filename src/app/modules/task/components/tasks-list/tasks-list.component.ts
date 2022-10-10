@@ -6,6 +6,7 @@ import { MatSort } from '@angular/material/sort';
 import { MatTableDataSource } from '@angular/material/table';
 // Services, components
 import { CreateTaskModalComponent } from '../create-task-modal/create-task-modal.component';
+import { DeleteTaskModalComponent } from '../delete-task-modal/delete-task-modal.component';
 import { LoadingService } from 'src/app/shared/services/loading.service';
 import { NotificationService } from 'src/app/shared/services/notification.service';
 import { EventBusService } from 'src/app/shared/modules/event-bus/event-bus.service';
@@ -52,19 +53,10 @@ export class TasksListComponent implements OnInit, OnDestroy {
 	}
 
 	public deleteTask(id: number): void {
-		this.taskService.deleteTask(id)
+		this.dialog.open(DeleteTaskModalComponent, { data: id })
+			.afterClosed()
 			.pipe(take(1))
-			.subscribe({
-				next: response => {
-					this.loadingService.loading$.next(false);
-					this.notificationService.openSnackBar(response.message || '');
-					this.getTasks();
-				},
-				error: error => {
-					this.loadingService.loading$.next(false);
-					console.error(error);
-				}
-			});
+			.subscribe(() => this.getTasks());
 	}
 
 	public editTask(task: Task): void {

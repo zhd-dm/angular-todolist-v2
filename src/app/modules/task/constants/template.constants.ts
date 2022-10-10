@@ -18,3 +18,8 @@ export const CREATE_TASK_MODAL_TEMPLATE_TEXT = {
 	nothing: 'Nothing',
 	priority: 'Priority?'
 };
+
+export const DELETE_TASK_MODAL_TEMPLATE_TEXT = {
+	delete: 'Delete',
+	sure: 'Are you sure?'
+};
