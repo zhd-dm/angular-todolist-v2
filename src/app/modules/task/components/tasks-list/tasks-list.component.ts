@@ -7,6 +7,7 @@ import { MatTableDataSource } from '@angular/material/table';
 // Services, components
 import { CreateTaskModalComponent } from '../create-task-modal/create-task-modal.component';
 import { DeleteTaskModalComponent } from '../delete-task-modal/delete-task-modal.component';
+import { EditTaskModalComponent } from '../edit-task-modal/edit-task-modal.component';
 import { LoadingService } from 'src/app/shared/services/loading.service';
 import { NotificationService } from 'src/app/shared/services/notification.service';
 import { EventBusService } from 'src/app/shared/modules/event-bus/event-bus.service';
@@ -43,6 +44,7 @@ export class TasksListComponent implements OnInit, OnDestroy {
 	) {}
 
 	ngOnInit(): void {
+		this.loadingService.startLoad();
 		this.getTasks();
 		this.eventBusSubscribe();
 	}
@@ -60,18 +62,10 @@ export class TasksListComponent implements OnInit, OnDestroy {
 	}
 
 	public editTask(task: Task): void {
-		this.taskService.updateTask(task)
+		this.dialog.open(EditTaskModalComponent, { data: task })
+			.afterClosed()
 			.pipe(take(1))
-			.subscribe({
-				next: response => {
-					this.loadingService.loading$.next(false);
-					this.notificationService.openSnackBar(response.message || '');
-				},
-				error: error => {
-					this.loadingService.loading$.next(false);
-					console.error(error);
-				}
-			});
+			.subscribe(() => this.getTasks());
 	}
 
 	private getTasks(): void {
@@ -80,6 +74,7 @@ export class TasksListComponent implements OnInit, OnDestroy {
 				next: tasks => {
 					this.data$.next(new MatTableDataSource(tasks));
 					this.data$.value.sort = this.sort;
+					this.loadingService.stopLoad();
 				},
 				error: error => console.log(error)
 			});

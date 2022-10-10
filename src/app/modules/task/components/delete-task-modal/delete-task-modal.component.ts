@@ -26,17 +26,16 @@ export class DeleteTaskModalComponent {
 	) {}
 
 	public deleteTask(): void {
+		this.loadingService.startLoad();
 		this.taskService.deleteTask(this.data.id)
 			.pipe(take(1))
 			.subscribe({
 				next: response => {
 					this.dialogRef.close();
-					this.loadingService.loading$.next(false);
 					this.notificationService.openSnackBar(response.message || '');
 				},
 				error: error => {
 					this.dialogRef.close();
-					this.loadingService.loading$.next(false);
 					console.error(error);
 				}
 			});

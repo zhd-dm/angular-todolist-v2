@@ -16,10 +16,21 @@ export const CREATE_TASK_MODAL_TEMPLATE_TEXT = {
 	deadline: 'Deadline',
 	category: 'Category',
 	nothing: 'Nothing',
-	priority: 'Priority?'
+	priority: 'Priority?',
+	create: 'Create'
 };
 
 export const DELETE_TASK_MODAL_TEMPLATE_TEXT = {
 	delete: 'Delete',
 	sure: 'Are you sure?'
+};
+
+export const EDIT_TASK_MODAL_TEMPLATE_TEXT = {
+	taskName: 'Task name',
+	editTask: 'Edit task',
+	deadline: 'Deadline',
+	category: 'Category',
+	nothing: 'Nothing',
+	priority: 'Priority?',
+	update: 'Update'
 };
