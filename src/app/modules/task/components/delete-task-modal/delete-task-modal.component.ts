@@ -9,7 +9,7 @@ import { NotificationService } from 'src/app/shared/services/notification.servic
 import { DELETE_TASK_MODAL_TEMPLATE_TEXT } from '../../constants/template.constants';
 
 @Component({
-	selector: 'app-delete-task-modal',
+	selector: 'delete-task-modal',
 	templateUrl: './delete-task-modal.component.html',
 	styleUrls: ['./delete-task-modal.component.scss'],
 	changeDetection: ChangeDetectionStrategy.OnPush

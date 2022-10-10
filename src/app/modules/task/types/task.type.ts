@@ -3,7 +3,7 @@ export type Task = {
 	name: string;
 	deadline: string;
 	priority?: boolean;
-	category?: string;
+	categoryId?: number;
 	ownerId?: number;
 	isGeneral: boolean;
   }

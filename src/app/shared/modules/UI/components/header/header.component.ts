@@ -4,7 +4,7 @@ import { Router } from '@angular/router';
 import { EventBusService } from '../../../event-bus/event-bus.service';
 import { AuthService } from 'src/app/shared/services/auth.service';
 // Constants
-import { AUTH_ROUTER_LINKS } from 'src/app/shared/constants/router-link.constants';
+import { ROUTER_LINKS } from 'src/app/shared/constants/router-link.constants';
 import { HEADER_TEMPLATE_TEXT } from '../../constants/constants';
 import { EventType } from '../../../event-bus/types';
 
@@ -15,10 +15,9 @@ import { EventType } from '../../../event-bus/types';
 	changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class HeaderComponent {
+	public ROUTER_LINKS = ROUTER_LINKS;
 
 	public TEMPLATE_TEXT = HEADER_TEMPLATE_TEXT;
-
-	public ROUTER_LINKS = AUTH_ROUTER_LINKS;
 
 	public EventType = EventType;
 
@@ -36,5 +35,10 @@ export class HeaderComponent {
 
 	public logOut(): void {
 		this.authService.logOut();
+		this.router.navigate([ROUTER_LINKS.home]);
+	}
+
+	public goTo(link: string): void {
+		this.router.navigate([link]);
 	}
 }

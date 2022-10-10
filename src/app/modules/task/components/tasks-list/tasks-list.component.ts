@@ -9,7 +9,6 @@ import { CreateTaskModalComponent } from '../create-task-modal/create-task-modal
 import { DeleteTaskModalComponent } from '../delete-task-modal/delete-task-modal.component';
 import { EditTaskModalComponent } from '../edit-task-modal/edit-task-modal.component';
 import { LoadingService } from 'src/app/shared/services/loading.service';
-import { NotificationService } from 'src/app/shared/services/notification.service';
 import { EventBusService } from 'src/app/shared/modules/event-bus/event-bus.service';
 import { TaskService } from '../../services/task.service';
 // Types
@@ -31,13 +30,12 @@ export class TasksListComponent implements OnInit, OnDestroy {
 
 	public displayedColumns: string[] = ['id', 'name', 'deadline', 'priority', 'category', 'settings'];
 
-	@ViewChild(MatSort) public sort: MatSort = new MatSort;
+	@ViewChild(MatSort) public sort = new MatSort;
 
 	private destroy$ = new Subject();
 
 	constructor(
 		private loadingService: LoadingService,
-		private notificationService: NotificationService,
 		private eventBusService: EventBusService,
 		private taskService: TaskService,
 		private dialog: MatDialog

@@ -13,7 +13,7 @@ import { Task } from '../../types/task.type';
 import { EDIT_TASK_MODAL_TEMPLATE_TEXT } from '../../constants/template.constants';
 
 @Component({
-	selector: 'app-edit-task-modal',
+	selector: 'edit-task-modal',
 	templateUrl: './edit-task-modal.component.html',
 	styleUrls: ['./edit-task-modal.component.scss'],
 	changeDetection: ChangeDetectionStrategy.OnPush
@@ -36,7 +36,7 @@ export class EditTaskModalComponent {
 		this.form = new FormGroup({
 			name: new FormControl({ value: this.data.name, disabled: true }),
 			deadline: new FormControl(this.data.deadline, [Validators.required]),
-			category: new FormControl(this.data.category),
+			category: new FormControl(this.data.categoryId),
 			priority: new FormControl(this.data.priority)
 		});
 	}
