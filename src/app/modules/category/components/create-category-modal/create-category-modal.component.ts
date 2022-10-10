@@ -4,16 +4,16 @@ import { Router } from '@angular/router';
 import { MatDialogRef } from '@angular/material/dialog';
 import { take } from 'rxjs';
 // Services
-import { CategoryService } from '../services/category.service';
+import { CategoryService } from '../../services/category.service';
 import { LoadingService } from 'src/app/shared/services/loading.service';
 import { NotificationService } from 'src/app/shared/services/notification.service';
 import { EventBusService } from 'src/app/shared/modules/event-bus/event-bus.service';
 // Types
 import { EventType } from 'src/app/shared/modules/event-bus/types';
-import { Category } from '../types/category.type';
+import { Category } from '../../types/category.type';
 // Constants
 import { ROUTER_LINKS } from 'src/app/shared/constants/router-link.constants';
-import { CREATE_CATEGORY_MODAL_TEMPLATE_TEXT } from '../constants/template.constants';
+import { CREATE_CATEGORY_MODAL_TEMPLATE_TEXT } from '../../constants/template.constants';
 
 @Component({
 	selector: 'create-category-modal',
