@@ -13,7 +13,9 @@ import { LocalStorageService } from '../services/local-storage.service';
 import { User } from '../types/user.type';
 import { IValidate } from '../types/validate.type';
 // Constants
-// import { STORAGE_USERS } from '../constants/local-storage.constants';
+import { API_USERS, ApiAuthNames } from '../constants/api.constants';
+import { STORAGE_USERS, STORAGE_LOGGED_IN } from '../constants/local-storage.constants';
+import { AUTH_RESPONSE_MESSAGES } from '../constants/api-response-messages.const';
 // Utils
 import { generateIsValidateObj } from '../utils/utils';
 
@@ -24,11 +26,11 @@ export class AuthInterceptor implements HttpInterceptor {
 
 	intercept(request: HttpRequest<unknown>, next: HttpHandler): Observable<HttpEvent<unknown>> {
 
-		if (request.url.includes('/auth')) {
-			this.checkForEmptyStorage('users');
-			if (request.url.includes('/login')) {
+		if (request.url.includes(API_USERS)) {
+			this.checkForEmptyStorage(STORAGE_USERS);
+			if (request.url.includes(ApiAuthNames.login)) {
 				return this.loginUser(request.body as User);
-			} else if (request.url.includes('/register')) {
+			} else if (request.url.includes(ApiAuthNames.register)) {
 				return this.registrationUser(request.body as User);
 			}
 		}
@@ -49,22 +51,22 @@ export class AuthInterceptor implements HttpInterceptor {
 	}
 
 	private checkUser(user: User, isRegister?: boolean): IValidate {
-		const storage: User[] = this.localStorageService.getItem('users') as User[];
+		const storage: User[] = this.localStorageService.getItem(STORAGE_USERS) as User[];
 
 		if (storage.length > 0) {
 			for (let i = 0; i < storage.length; i++) {
 				if (!isRegister) {
 					if (user.email.toLowerCase() === storage[i].email && user.password === storage[i].password) {
-						this.localStorageService.setItem('loggedIn', storage[i].id);
-						return generateIsValidateObj(true, 'Login success');
+						this.localStorageService.setItem(STORAGE_LOGGED_IN, storage[i].id);
+						return generateIsValidateObj(true, AUTH_RESPONSE_MESSAGES.loginSuccess);
 					} else if (user.email.toLowerCase() === storage[i].email && user.password !== storage[i].password) {
-						return generateIsValidateObj(false, 'Incorrect password!');
+						return generateIsValidateObj(false, AUTH_RESPONSE_MESSAGES.passwordIncorrect);
 					} else {
-						return generateIsValidateObj(false, 'User not found!');
+						return generateIsValidateObj(false, AUTH_RESPONSE_MESSAGES.userNotFound);
 					}
 				} else {
 					if (storage.find(item => user.email.toLowerCase() === item.email)) {
-						return generateIsValidateObj(false, 'Email is busy!');
+						return generateIsValidateObj(false, AUTH_RESPONSE_MESSAGES.emailIsBusy);
 					} else {
 						return this.saveUser(user, storage);
 					}
@@ -72,7 +74,7 @@ export class AuthInterceptor implements HttpInterceptor {
 			}
 		} else {
 			if (!isRegister) {
-				return generateIsValidateObj(false, 'User not found!');
+				return generateIsValidateObj(false, AUTH_RESPONSE_MESSAGES.userNotFound);
 			} else {
 				return this.saveUser(user, storage);
 			}
@@ -86,9 +88,9 @@ export class AuthInterceptor implements HttpInterceptor {
 		user.email.toLowerCase();
 		user.id = Date.now();
 		storage.push(user);
-		this.localStorageService.setItem('users', storage);
-		this.localStorageService.setItem('loggedIn', user.id);
-		return generateIsValidateObj(true, 'Registration success');
+		this.localStorageService.setItem(STORAGE_USERS, storage);
+		this.localStorageService.setItem(STORAGE_LOGGED_IN, user.id);
+		return generateIsValidateObj(true, AUTH_RESPONSE_MESSAGES.registerSuccess);
 	}
 
 	//----------------------------------------------------------------------------//
