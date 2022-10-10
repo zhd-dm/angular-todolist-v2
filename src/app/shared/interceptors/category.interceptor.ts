@@ -35,7 +35,7 @@ export class CategoryInterceptor implements HttpInterceptor {
 				return this.updateCategory(request.body as Category);
 			} else if (request.url.includes(ApiCategoryNames.delete)) {
 				const id = +request.url.split('?')[1];
-				return this.deleteTask(id);
+				return this.deleteCategory(id);
 			}
 		}
 
@@ -65,7 +65,7 @@ export class CategoryInterceptor implements HttpInterceptor {
 		return of(new HttpResponse<IValidate>({ status: 200, body: generateIsValidateObj(true, CATEGORY_RESPONSE_MESSAGES.updateSuccess) }));
 	}
 
-	private deleteTask(id: number): Observable<HttpEvent<IValidate>> {
+	private deleteCategory(id: number): Observable<HttpEvent<IValidate>> {
 		const storage = this.localStorageService.getItem(STORAGE_CATEGORIES) as Category[];
 		const index = storage.findIndex(category => category.id === id);
 		storage.splice(index, 1);
