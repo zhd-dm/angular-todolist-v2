@@ -3,7 +3,8 @@ import { MatDialog } from '@angular/material/dialog';
 import { MatSort } from '@angular/material/sort';
 import { MatTableDataSource } from '@angular/material/table';
 import { BehaviorSubject, Subject, take, takeUntil } from 'rxjs';
-// Services
+// Services, components
+import { CreateTaskModalComponent } from 'src/app/modules/task/components/create-task-modal/create-task-modal.component';
 import { CategoryService } from '../../services/category.service';
 import { EventBusService } from 'src/app/shared/modules/event-bus/event-bus.service';
 import { LoadingService } from 'src/app/shared/services/loading.service';
@@ -49,14 +50,14 @@ export class CategoriesListComponent implements OnInit, OnDestroy {
 	}
 
 	public deleteCategory(id: number): void {
-		// this.dialog.open(DeleteTaskModalComponent, { data: id })
+		// this.dialog.open(DeleteCategoryModalComponent, { data: id })
 		// 	.afterClosed()
 		// 	.pipe(take(1))
 		// 	.subscribe(() => this.getCategories());
 	}
 
 	public editCategory(category: Category): void {
-		// this.dialog.open(EditTaskModalComponent, { data: category })
+		// this.dialog.open(EditCategoryModalComponent, { data: category })
 		// 	.afterClosed()
 		// 	.pipe(take(1))
 		// 	.subscribe(() => this.getCategories());
@@ -78,7 +79,7 @@ export class CategoriesListComponent implements OnInit, OnDestroy {
 		this.eventBusService.on(EventType.CREATE_CATEGORY)
 			.pipe(takeUntil(this.destroy$))
 			.subscribe(() => {
-				// this.dialog.open(CreateTaskModalComponent);
+				this.dialog.open(CreateTaskModalComponent);
 			});
 
 		this.eventBusService.on(EventType.UPDATE_CATEGORY_LIST)

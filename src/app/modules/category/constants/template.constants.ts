@@ -7,13 +7,11 @@ export const CATEGORIES_LIST_TEMPLATE_TEXT = {
 };
 
 export const CREATE_CATEGORY_MODAL_TEMPLATE_TEXT = {
-	createNewTask: 'Create new task',
-	taskName: 'Task Name',
-	deadline: 'Deadline',
-	category: 'Category',
-	nothing: 'Nothing',
-	priority: 'Priority?',
-	create: 'Create'
+	createNewCategory: 'Create new category',
+	categoryName: 'Category name',
+	color: 'Color',
+	create: 'Create',
+	goToCategoriesList: 'Go to categories list'
 };
 
 export const DELETE_CATEGORY_MODAL_TEMPLATE_TEXT = {
@@ -22,11 +20,7 @@ export const DELETE_CATEGORY_MODAL_TEMPLATE_TEXT = {
 };
 
 export const EDIT_CATEGORY_MODAL_TEMPLATE_TEXT = {
-	taskName: 'Task name',
-	editTask: 'Edit task',
-	deadline: 'Deadline',
-	category: 'Category',
-	nothing: 'Nothing',
-	priority: 'Priority?',
+	categoryName: 'Category name',
+	color: 'Color',
 	update: 'Update'
 };
