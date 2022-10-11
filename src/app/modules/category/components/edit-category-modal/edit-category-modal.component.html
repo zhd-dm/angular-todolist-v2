@@ -1,0 +1,17 @@
+<form
+	[formGroup]="form"
+	class="form-group form-group__modal flex-column">
+    <div class="mat-title">{{ TEMPLATE_TEXT.editCategory }}</div>
+
+    <mat-form-field color="accent" appearance="outline">
+        <mat-label>{{ TEMPLATE_TEXT.categoryName }}</mat-label>
+        <input type="text" matInput formControlName="name" [placeholder]="TEMPLATE_TEXT.categoryName">
+    </mat-form-field>
+    <button type="submit" class="btn-accent" mat-raised-button [disabled]="form.invalid" (click)="updateCategory()">
+		{{ TEMPLATE_TEXT.update }}
+	</button>
+</form>
+
+<button type="submit" mat-raised-button color="accent" (click)="goTo(ROUTER_LINKS.categoriesList)">
+	{{ TEMPLATE_TEXT.goToCategoriesList }}
+</button>

@@ -20,7 +20,9 @@ export const DELETE_CATEGORY_MODAL_TEMPLATE_TEXT = {
 };
 
 export const EDIT_CATEGORY_MODAL_TEMPLATE_TEXT = {
+	editCategory: 'Edit category',
 	categoryName: 'Category name',
 	color: 'Color',
-	update: 'Update'
+	update: 'Update',
+	goToCategoriesList: 'Go to categories list'
 };
