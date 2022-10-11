@@ -11,7 +11,6 @@ import { DELETE_TASK_MODAL_TEMPLATE_TEXT } from '../../constants/template.consta
 @Component({
 	selector: 'delete-task-modal',
 	templateUrl: './delete-task-modal.component.html',
-	styleUrls: ['./delete-task-modal.component.scss'],
 	changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class DeleteTaskModalComponent {

@@ -18,7 +18,6 @@ import { CREATE_CATEGORY_MODAL_TEMPLATE_TEXT } from '../../constants/template.co
 @Component({
 	selector: 'create-category-modal',
 	templateUrl: './create-category-modal.component.html',
-	styleUrls: ['./create-category-modal.component.scss'],
 	changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class CreateCategoryModalComponent {

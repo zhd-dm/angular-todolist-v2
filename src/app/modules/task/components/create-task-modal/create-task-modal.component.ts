@@ -19,7 +19,6 @@ import { CREATE_TASK_MODAL_TEMPLATE_TEXT } from '../../constants/template.consta
 @Component({
 	selector: 'create-task-modal',
 	templateUrl: './create-task-modal.component.html',
-	styleUrls: ['./create-task-modal.component.scss'],
 	changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class CreateTaskModalComponent {

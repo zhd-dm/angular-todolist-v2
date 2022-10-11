@@ -15,7 +15,6 @@ import { EDIT_TASK_MODAL_TEMPLATE_TEXT } from '../../constants/template.constant
 @Component({
 	selector: 'edit-task-modal',
 	templateUrl: './edit-task-modal.component.html',
-	styleUrls: ['./edit-task-modal.component.scss'],
 	changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class EditTaskModalComponent {

@@ -19,7 +19,6 @@ import { CATEGORIES_LIST_TEMPLATE_TEXT } from '../../constants/template.constant
 @Component({
 	selector: 'categories-list',
 	templateUrl: './categories-list.component.html',
-	styleUrls: ['./categories-list.component.scss'],
 	changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class CategoriesListComponent implements OnInit, OnDestroy {

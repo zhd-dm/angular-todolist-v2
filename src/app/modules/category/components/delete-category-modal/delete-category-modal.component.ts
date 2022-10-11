@@ -11,7 +11,6 @@ import { DELETE_CATEGORY_MODAL_TEMPLATE_TEXT } from '../../constants/template.co
 @Component({
 	selector: 'delete-category-modal',
 	templateUrl: './delete-category-modal.component.html',
-	styleUrls: ['./delete-category-modal.component.scss'],
 	changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class DeleteCategoryModalComponent{

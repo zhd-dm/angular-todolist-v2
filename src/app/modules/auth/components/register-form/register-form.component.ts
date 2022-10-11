@@ -16,7 +16,6 @@ import { TASKS_ROUTER_LINKS } from 'src/app/shared/constants/router-link.constan
 @Component({
 	selector: 'register-form',
 	templateUrl: './register-form.component.html',
-	styleUrls: ['./register-form.component.scss'],
 	changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class RegisterFormComponent {

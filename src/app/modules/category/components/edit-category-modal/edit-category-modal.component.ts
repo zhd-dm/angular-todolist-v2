@@ -16,7 +16,6 @@ import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 @Component({
 	selector: 'edit-category-modal',
 	templateUrl: './edit-category-modal.component.html',
-	styleUrls: ['./edit-category-modal.component.scss'],
 	changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class EditCategoryModalComponent {

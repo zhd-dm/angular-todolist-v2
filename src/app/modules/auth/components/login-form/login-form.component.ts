@@ -16,7 +16,6 @@ import { TASKS_ROUTER_LINKS } from 'src/app/shared/constants/router-link.constan
 @Component({
 	selector: 'login-form',
 	templateUrl: './login-form.component.html',
-	styleUrls: ['./login-form.component.scss'],
 	changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class LoginFormComponent {
