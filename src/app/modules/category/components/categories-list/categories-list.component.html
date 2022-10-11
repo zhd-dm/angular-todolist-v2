@@ -22,10 +22,10 @@
 		<ng-container matColumnDef="settings">
 			<th mat-header-cell *matHeaderCellDef>{{ TEMPLATE_TEXT.settings }}</th>
 			<td mat-cell *matCellDef="let element">
-				<button mat-icon-button color="warn" (click)="deleteCategory(element.id)">
+				<button mat-icon-button class="btn-icon-warn" (click)="deleteCategory(element.id)">
 					<mat-icon>delete icon</mat-icon>
 				</button>
-				<button mat-icon-button color="accent" (click)="editCategory(element)">
+				<button mat-icon-button class="btn-icon-accent" (click)="editCategory(element)">
 					<mat-icon>edit icon</mat-icon>
 				</button>
 			</td>

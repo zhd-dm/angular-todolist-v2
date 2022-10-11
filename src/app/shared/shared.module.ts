@@ -6,6 +6,7 @@ import { UIModule } from './modules/UI/ui.module';
 // Interceptors
 import { AuthInterceptor } from './interceptors/auth.interceptor';
 import { TaskInterceptor } from './interceptors/task.interceptor';
+import { CategoryInterceptor } from './interceptors/category.interceptor';
 // Services
 import { LocalStorageService } from './services/local-storage.service';
 import { NotificationService } from './services/notification.service';
@@ -35,6 +36,11 @@ import { ApiService } from './services/api.service';
 		{
 			provide: HTTP_INTERCEPTORS,
 			useClass: TaskInterceptor,
+			multi: true
+		},
+		{
+			provide: HTTP_INTERCEPTORS,
+			useClass: CategoryInterceptor,
 			multi: true
 		}
 	]
