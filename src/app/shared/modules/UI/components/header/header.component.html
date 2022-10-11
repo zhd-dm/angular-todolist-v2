@@ -2,36 +2,29 @@
 	<div class="header-wrapper__content">
 		<ng-container *ngIf="!(isAuth$ | async)">
 			<button
-				class="header-wrapper__link btn-primary"
+				class="btn-primary"
 				mat-raised-button
-				(click)="auth(ROUTER_LINKS.login)"
+				(click)="goTo(ROUTER_LINKS.login)"
 			>
 				{{ TEMPLATE_TEXT.login }}
 			</button>
 			<button
-				class="header-wrapper__link btn-primary"
+				class="btn-primary"
 				mat-raised-button
-				(click)="auth(ROUTER_LINKS.register)"
+				(click)="goTo(ROUTER_LINKS.register)"
 			>
 				{{ TEMPLATE_TEXT.register }}
 			</button>
 		</ng-container>
 		<ng-container *ngIf="isAuth$ | async">
-			<button
-				class="header-wrapper__link btn-accent"
-				mat-raised-button
-				(click)="goTo(ROUTER_LINKS.tasksList)"
-			>
-				{{ TEMPLATE_TEXT.taskList }}
-			</button>
-			<button mat-raised-button class="btn-accent" (click)="eventBusService.push({ type: EventType.CREATE_TASK })">
+			<button mat-raised-button class="btn-accent" (click)="checkNavigate(EventType.TASK_URL)">
 				<mat-icon color="primary">add icon</mat-icon>
 			</button>
-			<button mat-raised-button class="btn-accent" (click)="eventBusService.push({ type: EventType.CREATE_CATEGORY })">
+			<button mat-raised-button class="btn-accent" (click)="checkNavigate(EventType.CATEGORY_URL)">
 				<mat-icon color="primary">library_add</mat-icon>
 			</button>
 			<button
-				class="header-wrapper__link btn-warn"
+				class="btn-warn"
 				mat-raised-button
 				(click)="logOut()"
 			>

@@ -9,6 +9,7 @@ import { CreateTaskModalComponent } from '../create-task-modal/create-task-modal
 import { DeleteTaskModalComponent } from '../delete-task-modal/delete-task-modal.component';
 import { EditTaskModalComponent } from '../edit-task-modal/edit-task-modal.component';
 import { LoadingService } from 'src/app/shared/services/loading.service';
+import { AuthService } from 'src/app/shared/services/auth.service';
 import { EventBusService } from 'src/app/shared/modules/event-bus/event-bus.service';
 import { TaskService } from '../../services/task.service';
 // Types
@@ -36,6 +37,7 @@ export class TasksListComponent implements OnInit, OnDestroy {
 
 	constructor(
 		private loadingService: LoadingService,
+		private authService: AuthService,
 		private eventBusService: EventBusService,
 		private taskService: TaskService,
 		private dialog: MatDialog
@@ -45,6 +47,7 @@ export class TasksListComponent implements OnInit, OnDestroy {
 		this.loadingService.startLoad();
 		this.getTasks();
 		this.eventBusSubscribe();
+		this.authService.currentUrl$.next(EventType.TASK_URL);
 	}
 
 	ngOnDestroy(): void {
@@ -79,7 +82,7 @@ export class TasksListComponent implements OnInit, OnDestroy {
 	}
 
 	private eventBusSubscribe(): void {
-		this.eventBusService.on(EventType.CREATE_TASK)
+		this.eventBusService.on(EventType.TASK_URL)
 			.pipe(takeUntil(this.destroy$))
 			.subscribe(() => {
 				this.dialog.open(CreateTaskModalComponent);

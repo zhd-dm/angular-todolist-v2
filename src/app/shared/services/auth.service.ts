@@ -1,10 +1,11 @@
 import { Injectable } from '@angular/core';
-import { BehaviorSubject, Observable } from 'rxjs';
+import { BehaviorSubject, Observable, ReplaySubject } from 'rxjs';
 // Services
 import { ApiService } from './api.service';
 import { LoadingService } from './loading.service';
 import { LocalStorageService } from './local-storage.service';
 // Types
+import { EventType } from '../modules/event-bus/types';
 import { User } from '../types/user.type';
 import { IValidate } from '../types/validate.type';
 // Constants
@@ -16,6 +17,8 @@ import { STORAGE_LOGGED_IN } from '../constants/local-storage.constants';
 })
 export class AuthService {
 	public isAuth$ = new BehaviorSubject<boolean>(false);
+
+	public currentUrl$ = new ReplaySubject<EventType>(1);
 
 	constructor(
 		private apiService: ApiService,

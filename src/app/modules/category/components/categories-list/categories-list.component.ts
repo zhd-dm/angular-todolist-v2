@@ -8,8 +8,9 @@ import { CreateCategoryModalComponent } from '../create-category-modal/create-ca
 import { DeleteCategoryModalComponent } from '../delete-category-modal/delete-category-modal.component';
 import { EditCategoryModalComponent } from '../edit-category-modal/edit-category-modal.component';
 import { CategoryService } from '../../services/category.service';
-import { EventBusService } from 'src/app/shared/modules/event-bus/event-bus.service';
 import { LoadingService } from 'src/app/shared/services/loading.service';
+import { EventBusService } from 'src/app/shared/modules/event-bus/event-bus.service';
+import { AuthService } from 'src/app/shared/services/auth.service';
 // Types
 import { EventType } from 'src/app/shared/modules/event-bus/types';
 import { Category } from '../../types/category.type';
@@ -36,6 +37,7 @@ export class CategoriesListComponent implements OnInit, OnDestroy {
 		private categoryService: CategoryService,
 		private loadingService: LoadingService,
 		private eventBusService: EventBusService,
+		private authService: AuthService,
 		private dialog: MatDialog
 	) {}
 
@@ -43,6 +45,7 @@ export class CategoriesListComponent implements OnInit, OnDestroy {
 		this.loadingService.startLoad();
 		this.getCategories();
 		this.eventBusSubscribe();
+		this.authService.currentUrl$.next(EventType.CATEGORY_URL);
 	}
 
 	ngOnDestroy(): void {
@@ -77,7 +80,7 @@ export class CategoriesListComponent implements OnInit, OnDestroy {
 	}
 
 	private eventBusSubscribe(): void {
-		this.eventBusService.on(EventType.CREATE_CATEGORY)
+		this.eventBusService.on(EventType.CATEGORY_URL)
 			.pipe(takeUntil(this.destroy$))
 			.subscribe(() => {
 				this.dialog.open(CreateCategoryModalComponent);
