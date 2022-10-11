@@ -5,6 +5,8 @@ import { MatTableDataSource } from '@angular/material/table';
 import { BehaviorSubject, Subject, take, takeUntil } from 'rxjs';
 // Services, components
 import { CreateCategoryModalComponent } from '../create-category-modal/create-category-modal.component';
+import { DeleteCategoryModalComponent } from '../delete-category-modal/delete-category-modal.component';
+import { EditCategoryModalComponent } from '../edit-category-modal/edit-category-modal.component';
 import { CategoryService } from '../../services/category.service';
 import { EventBusService } from 'src/app/shared/modules/event-bus/event-bus.service';
 import { LoadingService } from 'src/app/shared/services/loading.service';
@@ -25,7 +27,7 @@ export class CategoriesListComponent implements OnInit, OnDestroy {
 
 	public data$ = new BehaviorSubject<MatTableDataSource<Category>>(new MatTableDataSource());
 
-	public displayedColumns: string[] = ['id', 'name', 'color'];
+	public displayedColumns: string[] = ['id', 'name', 'color', 'settings'];
 
 	@ViewChild(MatSort) public sort = new MatSort;
 
@@ -50,17 +52,17 @@ export class CategoriesListComponent implements OnInit, OnDestroy {
 	}
 
 	public deleteCategory(id: number): void {
-		// this.dialog.open(DeleteCategoryModalComponent, { data: id })
-		// 	.afterClosed()
-		// 	.pipe(take(1))
-		// 	.subscribe(() => this.getCategories());
+		this.dialog.open(DeleteCategoryModalComponent, { data: id })
+			.afterClosed()
+			.pipe(take(1))
+			.subscribe(() => this.getCategories());
 	}
 
 	public editCategory(category: Category): void {
-		// this.dialog.open(EditCategoryModalComponent, { data: category })
-		// 	.afterClosed()
-		// 	.pipe(take(1))
-		// 	.subscribe(() => this.getCategories());
+		this.dialog.open(EditCategoryModalComponent, { data: category })
+			.afterClosed()
+			.pipe(take(1))
+			.subscribe(() => this.getCategories());
 	}
 
 	private getCategories(): void {

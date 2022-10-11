@@ -23,7 +23,7 @@
         </mat-select>
     </mat-form-field>
 
-	<mat-checkbox formControlName="priority">{{ TEMPLATE_TEXT.priority }}</mat-checkbox>
+	<mat-checkbox class="mbottom-20" formControlName="priority">{{ TEMPLATE_TEXT.priority }}</mat-checkbox>
 
     <button type="submit" class="btn-accent" mat-raised-button (click)="createTask()" [disabled]="form.invalid">{{ TEMPLATE_TEXT.create }}</button>
 </form>

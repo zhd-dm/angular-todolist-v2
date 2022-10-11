@@ -27,10 +27,8 @@ export class CreateCategoryModalComponent {
 	public TEMPLATE_TEXT = CREATE_CATEGORY_MODAL_TEMPLATE_TEXT;
 
 	public form = new FormGroup ({
-		name: new FormControl('', [Validators.required, Validators.minLength(5)]),
-		deadline: new FormControl('', [Validators.required]),
-		category: new FormControl(''),
-		priority: new FormControl('')
+		name: new FormControl('', [Validators.required, Validators.minLength(5)])
+		// color: new FormControl('')
 	});
 
 	constructor(
@@ -51,7 +49,7 @@ export class CreateCategoryModalComponent {
 				this.notificationService.openSnackBar(response.message || '');
 				if (response.status) {
 					this.goTo(this.ROUTER_LINKS.categoriesList);
-					this.eventBusService.push({ type: EventType.CREATE_CATEGORY });
+					this.eventBusService.push({ type: EventType.UPDATE_CATEGORY_LIST });
 				}
 			});
 		this.dialogRef.close();
