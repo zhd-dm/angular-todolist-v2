@@ -52,10 +52,14 @@ export class CreateTaskModalComponent {
 				this.loadingService.stopLoad();
 				this.notificationService.openSnackBar(response.message || '');
 				if (response.status) {
-					this.router.navigate([TASKS_ROUTER_LINKS.tasksList]);
+					this.goTo(TASKS_ROUTER_LINKS.tasksList);
 					this.eventBusService.push({ type: EventType.UPDATE_TASK_LIST });
 				}
 			});
 		this.dialogRef.close();
+	}
+
+	public goTo(link: string): void {
+		this.router.navigate([link]);
 	}
 }
