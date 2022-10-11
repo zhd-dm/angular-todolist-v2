@@ -3,8 +3,9 @@ export enum EventType {
 	UPDATE_TASK_LIST = 'updateTaskList',
 	CREATE_CATEGORY = 'openModalCreateCategory',
 	UPDATE_CATEGORY_LIST = 'updateCategosyList',
-	TASK_URL = '/tasks',
-	CATEGORY_URL = '/categories'
+	TASK_URL = '/home/tasks',
+	CATEGORY_URL = '/home/categories',
+	LOGOUT = 'logout'
 }
 
 /* eslint-disable */

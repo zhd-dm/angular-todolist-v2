@@ -4,7 +4,8 @@ import { RouterModule, Routes } from '@angular/router';
 const routes: Routes = [
 	{
 		path: '',
-		loadChildren: () => import('./modules/task/task.module').then(module => module.TaskModule)
+		redirectTo: 'home',
+		pathMatch: 'full'
 	},
 	{
 		path: 'auth',
@@ -13,14 +14,6 @@ const routes: Routes = [
 	{
 		path: 'home',
 		loadChildren: () => import('./modules/home/home.module').then(module => module.HomeModule)
-	},
-	{
-		path: 'tasks',
-		loadChildren: () => import('./modules/task/task.module').then(module => module.TaskModule)
-	},
-	{
-		path: 'categories',
-		loadChildren: () => import('./modules/category/category.module').then(module => module.CategoryModule)
 	},
 	{
 		path: '**',

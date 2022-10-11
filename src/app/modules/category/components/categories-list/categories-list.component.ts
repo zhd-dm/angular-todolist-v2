@@ -91,5 +91,11 @@ export class CategoriesListComponent implements OnInit, OnDestroy {
 			.subscribe(() => {
 				this.getCategories();
 			});
+
+		this.eventBusService.on(EventType.LOGOUT)
+			.pipe(takeUntil(this.destroy$))
+			.subscribe(() => {
+				this.data$.next(new MatTableDataSource());
+			});
 	}
 }

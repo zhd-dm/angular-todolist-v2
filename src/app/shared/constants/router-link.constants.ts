@@ -9,11 +9,11 @@ export const AUTH_ROUTER_LINKS = {
 };
 
 export const TASKS_ROUTER_LINKS = {
-	tasksList: '/tasks'
+	tasksList: `${HOME_ROUTER_LINKS.home}/tasks`
 };
 
 export const CATEGORIES_ROUTER_LINKS = {
-	categoriesList: '/categories'
+	categoriesList: `${HOME_ROUTER_LINKS.home}/categories`
 };
 
 export const ROUTER_LINKS = {

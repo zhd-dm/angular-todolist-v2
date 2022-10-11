@@ -93,6 +93,12 @@ export class TasksListComponent implements OnInit, OnDestroy {
 			.subscribe(() => {
 				this.getTasks();
 			});
+
+		this.eventBusService.on(EventType.LOGOUT)
+			.pipe(takeUntil(this.destroy$))
+			.subscribe(() => {
+				this.data$.next(new MatTableDataSource());
+			});
 	}
 
 }
