@@ -79,4 +79,30 @@
 		background-color: var(--color-warn);
 		color: var(--color-white);
 	}
+
+	.btn-icon-primary {
+		color: var(--color-primary);
+	}
+
+	.btn-icon-accent {
+		color: var(--color-accent);
+	}
+
+	.btn-icon-warn {
+		color: var(--color-warn);
+	}
+
+	//----------------------------------//
+
+	// Margins
+
+	.mtop-12 {
+		margin-top: var(--size-12);
+	}
+
+	.mbottom-20 {
+		margin-bottom: var(--size-20);
+	}
+
+	//----------------------------------//
 }

@@ -34,10 +34,10 @@
 		<ng-container matColumnDef="settings">
 			<th mat-header-cell *matHeaderCellDef> {{ TEMPLATE_TEXT.settings }} </th>
 			<td mat-cell *matCellDef="let element">
-				<button class="btn-warn" mat-icon-button (click)="deleteTask(element.id)">
+				<button class="btn-icon-warn" mat-icon-button (click)="deleteTask(element.id)">
 					<mat-icon>delete icon</mat-icon>
 				</button>
-				<button class="btn-accent" mat-icon-button (click)="editTask(element)">
+				<button class="btn-icon-accent" mat-icon-button (click)="editTask(element)">
 					<mat-icon>edit icon</mat-icon>
 				</button>
 			</td>
