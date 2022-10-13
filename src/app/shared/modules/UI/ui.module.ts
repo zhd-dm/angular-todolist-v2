@@ -4,6 +4,7 @@ import { CommonModule } from '@angular/common';
 import { MaterialModule } from '../material/material.module';
 // Components
 import { HeaderComponent } from './components/header/header.component';
+import { UiButtonComponent } from './components/ui-button/ui-button.component';
 // Directives
 import { UiSpinnerDirective } from './directives/ui-spinner.directive';
 
@@ -12,11 +13,13 @@ import { UiSpinnerDirective } from './directives/ui-spinner.directive';
 @NgModule({
 	declarations: [
 		HeaderComponent,
-		UiSpinnerDirective
+		UiSpinnerDirective,
+		UiButtonComponent
 	],
 	exports: [
 		HeaderComponent,
-		UiSpinnerDirective
+		UiSpinnerDirective,
+		UiButtonComponent
 	],
 	imports: [
 		CommonModule,

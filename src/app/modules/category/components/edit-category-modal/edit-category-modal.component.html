@@ -7,11 +7,10 @@
         <mat-label>{{ TEMPLATE_TEXT.categoryName }}</mat-label>
         <input type="text" matInput formControlName="name" [placeholder]="TEMPLATE_TEXT.categoryName">
     </mat-form-field>
-    <button type="submit" class="btn-accent" mat-raised-button [disabled]="form.invalid" (click)="updateCategory()">
-		{{ TEMPLATE_TEXT.update }}
-	</button>
+    <ui-button
+		type="submit"
+		[disabled]="form.invalid"
+		[label]="TEMPLATE_TEXT.update"
+		(buttonClick)="updateCategory()"
+	></ui-button>
 </form>
-
-<button class="mtop-12" type="submit" mat-raised-button color="accent" (click)="goTo(ROUTER_LINKS.categoriesList)">
-	{{ TEMPLATE_TEXT.goToCategoriesList }}
-</button>

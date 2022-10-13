@@ -21,12 +21,9 @@
 			[placeholder]="TEMPLATE_TEXT.password">
 	</mat-form-field>
 
-	<button
-		class="btn-accent"
-		mat-raised-button
+	<ui-button
+		[label]="TEMPLATE_TEXT.login"
 		[disabled]="form.invalid"
-		(click)="logIn()"
-	>
-		{{ TEMPLATE_TEXT.login }}
-	</button>
+		(buttonClick)="logIn()"
+	></ui-button>
 </form>

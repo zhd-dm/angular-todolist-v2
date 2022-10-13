@@ -1,0 +1,22 @@
+<button
+	*ngIf="typeDir === 'mat-raised-button'"
+	[type]="type"
+	mat-raised-button
+	[ngClass]="getClasses(styleClasses)"
+	[disabled]="disabled"
+	(click)="buttonClick.emit($event)"
+>
+	<span *ngIf="label">{{label}}</span>
+	<mat-icon *ngIf="icon" [color]="iconColor">{{icon}}</mat-icon>
+</button>
+
+<button
+	*ngIf="typeDir === 'mat-icon-button'"
+	[type]="type"
+	mat-icon-button
+	[ngClass]="getClasses(styleClasses)"
+	[disabled]="disabled"
+	(click)="buttonClick.emit($event)"
+>
+	<mat-icon>{{icon}}</mat-icon>
+</button>

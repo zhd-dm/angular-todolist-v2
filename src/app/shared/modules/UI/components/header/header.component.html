@@ -1,35 +1,33 @@
 <header class="header-wrapper justify-align-center">
-	<div class="header-wrapper__content">
+	<div class="header-wrapper__content flex">
 		<ng-container *ngIf="!(isAuth$ | async)">
-			<button
-				class="btn-primary"
-				mat-raised-button
-				(click)="goTo(ROUTER_LINKS.login)"
-			>
-				{{ TEMPLATE_TEXT.login }}
-			</button>
-			<button
-				class="btn-primary"
-				mat-raised-button
-				(click)="goTo(ROUTER_LINKS.register)"
-			>
-				{{ TEMPLATE_TEXT.register }}
-			</button>
+			<ui-button
+				styleClasses="btn-primary"
+				[label]="TEMPLATE_TEXT.login"
+				(buttonClick)="goTo(ROUTER_LINKS.login)"
+			></ui-button>
+			<ui-button
+				styleClasses="btn-primary"
+				[label]="TEMPLATE_TEXT.register"
+				(buttonClick)="goTo(ROUTER_LINKS.register)"
+			></ui-button>
 		</ng-container>
 		<ng-container *ngIf="isAuth$ | async">
-			<button mat-raised-button class="btn-accent" (click)="checkNavigate(EventType.TASK_URL)">
-				<mat-icon color="primary">add icon</mat-icon>
-			</button>
-			<button mat-raised-button class="btn-accent" (click)="checkNavigate(EventType.CATEGORY_URL)">
-				<mat-icon color="primary">library_add</mat-icon>
-			</button>
-			<button
-				class="btn-warn"
-				mat-raised-button
-				(click)="logOut()"
-			>
-				{{ TEMPLATE_TEXT.logout }}
-			</button>
+			<ui-button
+				icon="add icon"
+				iconColor="primary"
+				(buttonClick)="checkNavigate(EventType.TASK_URL)"
+			></ui-button>
+			<ui-button
+				icon="library_add"
+				iconColor="primary"
+				(buttonClick)="checkNavigate(EventType.CATEGORY_URL)"
+			></ui-button>
+			<ui-button
+				styleClasses="btn-warn"
+				[label]="TEMPLATE_TEXT.logout"
+				(buttonClick)="logOut()"
+			></ui-button>
 		</ng-container>
 	</div>
 </header>

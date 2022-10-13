@@ -1,4 +1,8 @@
 <div>
     <div class="mat-title">{{ TEMPLATE_TEXT.sure }}</div>
-    <button mat-raised-button class="btn-warn" (click)="deleteCategory()">{{ TEMPLATE_TEXT.delete }}</button>
+	<ui-button
+		styleClasses="btn-warn"
+		[label]="TEMPLATE_TEXT.delete"
+		(buttonClick)="deleteCategory()"
+	></ui-button>
 </div>

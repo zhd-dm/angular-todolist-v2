@@ -40,12 +40,9 @@
 			[placeholder]="TEMPLATE_TEXT.repeatPassword">
 	</mat-form-field>
 
-	<button
-		class="btn-accent"
-		mat-raised-button
+	<ui-button
+		[label]="TEMPLATE_TEXT.register"
 		[disabled]="form.invalid"
-		(click)="register()"
-	>
-		{{ TEMPLATE_TEXT.register }}
-	</button>
+		(buttonClick)="register()"
+	></ui-button>
 </form>

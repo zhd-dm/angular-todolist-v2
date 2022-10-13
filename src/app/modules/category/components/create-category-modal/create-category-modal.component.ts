@@ -54,7 +54,7 @@ export class CreateCategoryModalComponent {
 		this.dialogRef.close();
 	}
 
-	public goTo(link: string): void {
+	private goTo(link: string): void {
 		this.router.navigate([link]);
 	}
 }

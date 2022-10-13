@@ -25,5 +25,10 @@
 
     <mat-checkbox class="mbottom-20" formControlName="priority">Priority?</mat-checkbox>
 
-    <button type="submit" class="btn-accent" mat-raised-button [disabled]="form.invalid" (click)="updateTask()">{{ TEMPLATE_TEXT.update }}</button>
+	<ui-button
+		type="submit"
+		[disabled]="form.invalid"
+		[label]="TEMPLATE_TEXT.update"
+		(buttonClick)="updateTask()"
+	></ui-button>
 </form>
