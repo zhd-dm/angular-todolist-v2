@@ -7,6 +7,8 @@ import { HeaderComponent } from './components/header/header.component';
 import { UiButtonComponent } from './components/ui-button/ui-button.component';
 // Directives
 import { UiSpinnerDirective } from './directives/ui-spinner.directive';
+import { UiInputComponent } from './components/ui-input/ui-input.component';
+import { ReactiveFormsModule } from '@angular/forms';
 
 
 
@@ -14,15 +16,18 @@ import { UiSpinnerDirective } from './directives/ui-spinner.directive';
 	declarations: [
 		HeaderComponent,
 		UiSpinnerDirective,
-		UiButtonComponent
+		UiButtonComponent,
+		UiInputComponent
 	],
 	exports: [
 		HeaderComponent,
 		UiSpinnerDirective,
-		UiButtonComponent
+		UiButtonComponent,
+		UiInputComponent
 	],
 	imports: [
 		CommonModule,
+		ReactiveFormsModule,
 		MaterialModule
 	]
 })

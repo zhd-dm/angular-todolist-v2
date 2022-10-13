@@ -1,0 +1,8 @@
+<mat-form-field [color]="colorField" [appearance]="appearance">
+	<mat-label *ngIf="labelText">{{ labelText }}</mat-label>
+	<input
+		matInput
+		[type]="inputType"
+		[formControlName]="formControlName || ''"
+		[placeholder]="placeholder || ''">
+</mat-form-field>
