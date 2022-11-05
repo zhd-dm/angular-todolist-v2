@@ -1,5 +1,5 @@
 import { ChangeDetectionStrategy, Component } from '@angular/core';
-import { FormControl, FormGroup, Validators } from '@angular/forms';
+import { FormGroup } from '@angular/forms';
 import { Router } from '@angular/router';
 import { take } from 'rxjs';
 // Services
@@ -7,11 +7,13 @@ import { AuthService } from 'src/app/shared/services/auth.service';
 import { LoadingService } from 'src/app/shared/services/loading.service';
 import { NotificationService } from 'src/app/shared/services/notification.service';
 // Types
-import { User } from 'src/app/shared/types/user.type';
+import { LoginUserForm, UserForLogin } from '../../config/types/forms.types';
 import { IValidate } from 'src/app/shared/types/validate.type';
 // Constants
-import { LOGIN_TEMPLATE_TEXT } from '../../constants/template.constants';
+import { LOGIN_TEMPLATE_TEXT } from '../../config/constants/template.constants';
 import { TASKS_ROUTER_LINKS } from 'src/app/shared/constants/router-link.constants';
+// Utils
+import { buildLoginForm } from '../../config/utils/build-forms';
 
 @Component({
 	selector: 'login-form',
@@ -21,20 +23,19 @@ import { TASKS_ROUTER_LINKS } from 'src/app/shared/constants/router-link.constan
 export class LoginFormComponent {
 	public TEMPLATE_TEXT = LOGIN_TEMPLATE_TEXT;
 
-	public form = new FormGroup({
-		email: new FormControl('', [Validators.required, Validators.email]),
-		password: new FormControl('', [Validators.required, Validators.minLength(5), Validators.maxLength(16)])
-	});
+	public form: FormGroup<LoginUserForm>;
 
 	constructor(
 		private router: Router,
 		private authService: AuthService,
 		private loadingService: LoadingService,
 		private notificationService: NotificationService
-	) {}
+	) {
+		this.form = buildLoginForm(null);
+	}
 
 	public logIn(): void {
-		this.authService.logIn(this.form.value as User)
+		this.authService.logIn(this.form.value as UserForLogin)
 			.pipe(take(1))
 			.subscribe({
 				next: res => {

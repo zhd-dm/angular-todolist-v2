@@ -11,13 +11,14 @@ import { Observable, of } from 'rxjs';
 import { LocalStorageService } from '../services/local-storage.service';
 // Types
 import { User } from '../types/user.type';
+import { LoginUser, RegisterUser } from '../types/user.type';
 import { IValidate } from '../types/validate.type';
 // Constants
 import { API_USERS, ApiAuthNames } from '../constants/api.constants';
 import { STORAGE_USERS, STORAGE_LOGGED_IN } from '../constants/local-storage.constants';
 import { AUTH_RESPONSE_MESSAGES } from '../constants/api-response-messages.const';
 // Utils
-import { generateIsValidateObj } from '../utils/utils';
+import { generateIsValidateObj, isRegisterUser } from '../utils/utils';
 
 @Injectable()
 export class AuthInterceptor implements HttpInterceptor {
@@ -29,9 +30,9 @@ export class AuthInterceptor implements HttpInterceptor {
 		if (request.url.includes(API_USERS)) {
 			this.checkForEmptyStorage(STORAGE_USERS);
 			if (request.url.includes(ApiAuthNames.login)) {
-				return this.loginUser(request.body as User);
+				return this.loginUser(request.body as LoginUser);
 			} else if (request.url.includes(ApiAuthNames.register)) {
-				return this.registrationUser(request.body as User);
+				return this.registrationUser(request.body as RegisterUser);
 			}
 		}
 
@@ -40,22 +41,22 @@ export class AuthInterceptor implements HttpInterceptor {
 
 	// Auth
 
-	private loginUser(user: User): Observable<HttpEvent<IValidate>> {
+	private loginUser(user: LoginUser): Observable<HttpEvent<IValidate>> {
 		const isValidate: IValidate = this.checkUser(user);
 		return of(new HttpResponse<IValidate>({ status: 200, body: isValidate }));
 	}
 
-	private registrationUser(user: User): Observable<HttpEvent<IValidate>> {
-		const isValidate: IValidate = this.checkUser(user, true);
+	private registrationUser(user: Omit<User, 'id'>): Observable<HttpEvent<IValidate>> {
+		const isValidate: IValidate = this.checkUser(user);
 		return of(new HttpResponse<IValidate>({ status: 200, body: isValidate }));
 	}
 
-	private checkUser(user: User, isRegister?: boolean): IValidate {
+	private checkUser(user: LoginUser | RegisterUser): IValidate {
 		const storage: User[] = this.localStorageService.getItem(STORAGE_USERS) as User[];
 
 		if (storage.length > 0) {
 			for (let i = 0; i < storage.length; i++) {
-				if (!isRegister) {
+				if (!isRegisterUser(user)) {
 					if (user.email.toLowerCase() === storage[i].email && user.password === storage[i].password) {
 						this.localStorageService.setItem(STORAGE_LOGGED_IN, storage[i].id);
 						return generateIsValidateObj(true, AUTH_RESPONSE_MESSAGES.loginSuccess);
@@ -73,7 +74,7 @@ export class AuthInterceptor implements HttpInterceptor {
 				}
 			}
 		} else {
-			if (!isRegister) {
+			if (!isRegisterUser(user)) {
 				return generateIsValidateObj(false, AUTH_RESPONSE_MESSAGES.userNotFound);
 			} else {
 				return this.saveUser(user, storage);
@@ -84,12 +85,12 @@ export class AuthInterceptor implements HttpInterceptor {
 		return {} as IValidate;
 	}
 
-	private saveUser(user: User, storage: User[]): IValidate {
-		user.email.toLowerCase();
-		user.id = Date.now();
-		storage.push(user);
+	private saveUser(user: RegisterUser, storage: User[]): IValidate {
+		const newUser: User = { ...user, id: Date.now() };
+		newUser.email.toLowerCase();
+		storage.push(newUser);
 		this.localStorageService.setItem(STORAGE_USERS, storage);
-		this.localStorageService.setItem(STORAGE_LOGGED_IN, user.id);
+		this.localStorageService.setItem(STORAGE_LOGGED_IN, newUser.id);
 		return generateIsValidateObj(true, AUTH_RESPONSE_MESSAGES.registerSuccess);
 	}
 

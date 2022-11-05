@@ -1,15 +1,17 @@
 import { AbstractControl, FormControl, FormGroup, ValidationErrors, ValidatorFn, Validators } from '@angular/forms';
 // types
-import { LoginUserForm, RegisterUserForm, UserForLoginForm, UserForRegisterForm } from '../types/forms.types';
+import { LoginUserForm, RegisterUserForm, UserForLogin, UserForRegister } from '../types/forms.types';
 
-export const buildLoginForm = (row: UserForLoginForm | null): FormGroup<LoginUserForm> =>
+export const buildLoginForm = (row: UserForLogin | null): FormGroup<LoginUserForm> =>
 	new FormGroup({
-		id: new FormControl<number | null>(row?.id ?? null),
-		email: new FormControl<string | null>(row?.email ?? null),
-		password: new FormControl<string | null>(row?.password ?? null)
+		email: new FormControl<string | null>(row?.email ?? null,
+			[Validators.required, Validators.email]),
+
+		password: new FormControl<string | null>(row?.password ?? null,
+			[Validators.required, Validators.minLength(5), Validators.maxLength(16)])
 	});
 
-export const buildRegisterForm = (row: UserForRegisterForm | null): FormGroup<RegisterUserForm> =>
+export const buildRegisterForm = (row: UserForRegister | null): FormGroup<RegisterUserForm> =>
 	new FormGroup({
 		name: new FormControl<string | null>(row?.name ?? null,
 			[Validators.required, Validators.minLength(3), Validators.maxLength(9)]),

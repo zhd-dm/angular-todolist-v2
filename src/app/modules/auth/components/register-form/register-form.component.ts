@@ -7,7 +7,7 @@ import { AuthService } from 'src/app/shared/services/auth.service';
 import { LoadingService } from 'src/app/shared/services/loading.service';
 import { NotificationService } from 'src/app/shared/services/notification.service';
 // Types
-import { RegisterUserForm, UserForRegisterForm } from '../../config/types/forms.types';
+import { RegisterUserForm, UserForRegister } from '../../config/types/forms.types';
 import { IValidate } from 'src/app/shared/types/validate.type';
 // Constants
 import { REGISTER_TEMPLATE_TEXT } from '../../config/constants/template.constants';
@@ -37,7 +37,7 @@ export class RegisterFormComponent {
 	public register(): void {
 		this.loadingService.startLoad();
 		// eslint-disable-next-line @typescript-eslint/no-unused-vars
-		const { repeatPassword, ...user } = this.form.value as UserForRegisterForm;
+		const { repeatPassword, ...user } = this.form.value as UserForRegister;
 		this.authService.register(user)
 			.pipe(take(1))
 			.subscribe({

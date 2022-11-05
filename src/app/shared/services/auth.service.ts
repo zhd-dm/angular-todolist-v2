@@ -6,7 +6,7 @@ import { LoadingService } from './loading.service';
 import { LocalStorageService } from './local-storage.service';
 // Types
 import { EventType } from '../modules/event-bus/types';
-import { User } from '../types/user.type';
+import { LoginUser, RegisterUser } from '../types/user.type';
 import { IValidate } from '../types/validate.type';
 // Constants
 import { ApiAuthNames, API_USERS, MethodNames } from '../constants/api.constants';
@@ -30,12 +30,12 @@ export class AuthService {
 		}
 	}
 
-	public logIn(user: User): Observable<IValidate> {
+	public logIn(user: LoginUser): Observable<IValidate> {
 		this.loadingService.startLoad();
 		return this.apiService.sendRequest(MethodNames.post, `${API_USERS}${ApiAuthNames.login}`, user);
 	}
 
-	public register(user: User): Observable<IValidate> {
+	public register(user: RegisterUser): Observable<IValidate> {
 		return this.apiService.sendRequest(MethodNames.post, `${API_USERS}${ApiAuthNames.register}`, user);
 	}
 

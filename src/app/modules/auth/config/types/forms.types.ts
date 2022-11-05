@@ -1,14 +1,13 @@
 import { FormControl } from '@angular/forms';
-import { User } from 'src/app/shared/types/user.type';
+import { LoginUser, RegisterUser } from 'src/app/shared/types/user.type';
 
-export type UserForLoginForm = Omit<User, 'name'>;
+export type UserForLogin = LoginUser;
 
-export type UserForRegisterForm = User & {
+export type UserForRegister = RegisterUser & {
 	repeatPassword: string;
 };
 
 export type LoginUserForm = {
-	id: FormControl<number | null>;
 	email: FormControl<string | null>;
 	password: FormControl<string | null>;
 };
