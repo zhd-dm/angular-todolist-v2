@@ -1,5 +1,5 @@
 import { ChangeDetectionStrategy, Component } from '@angular/core';
-import { FormControl, FormGroup, Validators } from '@angular/forms';
+import { FormGroup } from '@angular/forms';
 import { Router } from '@angular/router';
 import { MatDialogRef } from '@angular/material/dialog';
 import { take } from 'rxjs';
@@ -10,10 +10,13 @@ import { NotificationService } from 'src/app/shared/modules/notification/notific
 import { EventBusService } from 'src/app/shared/modules/event-bus/event-bus.service';
 // Types
 import { EventType } from 'src/app/shared/modules/event-bus/types';
-import { Category } from '../../types/category.type';
+import { Category } from '../../config/types/category.type';
+import { CreateCategoryForm } from '../../config/types/forms.types';
 // Constants
 import { ROUTER_LINKS } from 'src/app/shared/constants/router-link.constants';
-import { CREATE_CATEGORY_MODAL_TEMPLATE_TEXT } from '../../constants/template.constants';
+import { CREATE_CATEGORY_MODAL_TEMPLATE_TEXT } from '../../config/constants/template.constants';
+// Utils
+import { buildCreateCategoryForm } from '../../config/utils/build-forms';
 
 @Component({
 	selector: 'create-category-modal',
@@ -25,10 +28,7 @@ export class CreateCategoryModalComponent {
 
 	public TEMPLATE_TEXT = CREATE_CATEGORY_MODAL_TEMPLATE_TEXT;
 
-	public form = new FormGroup ({
-		name: new FormControl('', [Validators.required, Validators.minLength(5)])
-		// color: new FormControl('')
-	});
+	public form: FormGroup<CreateCategoryForm>;
 
 	constructor(
 		private router: Router,
@@ -37,7 +37,9 @@ export class CreateCategoryModalComponent {
 		private loadingService: LoadingService,
 		private notificationService: NotificationService,
 		private eventBusService: EventBusService
-	) {}
+	) {
+		this.form = buildCreateCategoryForm(null);
+	}
 
 	public createCategory(): void {
 		this.loadingService.startLoad();

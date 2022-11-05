@@ -6,7 +6,7 @@ import { CategoryService } from '../../services/category.service';
 import { LoadingService } from 'src/app/shared/modules/loading/loading.service';
 import { NotificationService } from 'src/app/shared/modules/notification/notification.service';
 // Constants
-import { DELETE_CATEGORY_MODAL_TEMPLATE_TEXT } from '../../constants/template.constants';
+import { DELETE_CATEGORY_MODAL_TEMPLATE_TEXT } from '../../config/constants/template.constants';
 
 @Component({
 	selector: 'delete-category-modal',

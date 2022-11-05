@@ -3,7 +3,8 @@ import { Observable } from 'rxjs';
 // Services
 import { ApiService } from 'src/app/shared/services/api.service';
 // Types
-import { Category } from '../types/category.type';
+import { Category } from '../config/types/category.type';
+import { CategoryForCreate, CategoryForEdit } from '../config/types/forms.types';
 import { IValidate } from 'src/app/shared/types/validate.type';
 // Constants
 import { ApiCategoryNames, API_CATEGORIES, MethodNames } from 'src/app/shared/constants/api.constants';
@@ -19,11 +20,11 @@ export class CategoryService {
 		return this.apiService.sendRequest(MethodNames.get, `${API_CATEGORIES}${ApiCategoryNames.get}`);
 	}
 
-	public createCategory(category: Category): Observable<IValidate> {
+	public createCategory(category: CategoryForCreate): Observable<IValidate> {
 		return this.apiService.sendRequest(MethodNames.post, `${API_CATEGORIES}${ApiCategoryNames.create}`, category);
 	}
 
-	public updateCategory(category: Category): Observable<IValidate> {
+	public updateCategory(category: CategoryForEdit): Observable<IValidate> {
 		return this.apiService.sendRequest(MethodNames.put, `${API_CATEGORIES}${ApiCategoryNames.update}`, category);
 	}
 

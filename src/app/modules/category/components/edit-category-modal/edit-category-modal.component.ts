@@ -1,5 +1,5 @@
 import { ChangeDetectionStrategy, Component, Inject } from '@angular/core';
-import { FormControl, FormGroup, Validators } from '@angular/forms';
+import { FormGroup } from '@angular/forms';
 import { Router } from '@angular/router';
 import { take } from 'rxjs';
 // Services
@@ -7,11 +7,12 @@ import { CategoryService } from '../../services/category.service';
 import { LoadingService } from 'src/app/shared/modules/loading/loading.service';
 import { NotificationService } from 'src/app/shared/modules/notification/notification.service';
 // Types
-import { Category } from '../../types/category.type';
+import { CategoryForEdit, EditCategoryForm } from '../../config/types/forms.types';
 // Constants
 import { ROUTER_LINKS } from 'src/app/shared/constants/router-link.constants';
-import { EDIT_CATEGORY_MODAL_TEMPLATE_TEXT } from '../../constants/template.constants';
+import { EDIT_CATEGORY_MODAL_TEMPLATE_TEXT } from '../../config/constants/template.constants';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
+import { buildEditCategoryForm } from '../../config/utils/build-forms';
 
 @Component({
 	selector: 'edit-category-modal',
@@ -23,24 +24,21 @@ export class EditCategoryModalComponent {
 
 	public TEMPLATE_TEXT = EDIT_CATEGORY_MODAL_TEMPLATE_TEXT;
 
-	public form: FormGroup;
+	public form: FormGroup<EditCategoryForm>;
 
 	constructor(
 		private dialogRef: MatDialogRef<EditCategoryModalComponent>,
-		@Inject(MAT_DIALOG_DATA) public data: Category,
+		@Inject(MAT_DIALOG_DATA) public data: CategoryForEdit,
 		private router: Router,
 		private categoryService: CategoryService,
 		private loadingService: LoadingService,
 		private notificationService: NotificationService
 	) {
-		this.form = new FormGroup ({
-			name: new FormControl({ value: this.data.name, disabled: true }),
-			color: new FormControl(this.data.color, [Validators.required])
-		});
+		this.form = buildEditCategoryForm(this.data);
 	}
 
 	public updateCategory(): void {
-		const updatedCategory = { ...this.data, ...this.form.value };
+		const updatedCategory = { ...this.data, ...this.form.value as CategoryForEdit };
 		this.loadingService.startLoad();
 		this.categoryService.updateCategory(updatedCategory)
 			.pipe(take(1))

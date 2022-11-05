@@ -6,7 +6,7 @@ import { TaskService } from '../../services/task.service';
 import { LoadingService } from 'src/app/shared/modules/loading/loading.service';
 import { NotificationService } from 'src/app/shared/modules/notification/notification.service';
 // Constants
-import { DELETE_TASK_MODAL_TEMPLATE_TEXT } from '../../constants/template.constants';
+import { DELETE_TASK_MODAL_TEMPLATE_TEXT } from '../../config/constants/template.constants';
 
 @Component({
 	selector: 'delete-task-modal',

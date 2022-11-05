@@ -13,9 +13,9 @@ import { EventBusService } from 'src/app/shared/modules/event-bus/event-bus.serv
 import { AuthService } from 'src/app/shared/services/auth.service';
 // Types
 import { EventType } from 'src/app/shared/modules/event-bus/types';
-import { Category } from '../../types/category.type';
+import { Category } from '../../config/types/category.type';
 // Constants
-import { CATEGORIES_LIST_TEMPLATE_TEXT } from '../../constants/template.constants';
+import { CATEGORIES_LIST_TEMPLATE_TEXT } from '../../config/constants/template.constants';
 
 @Component({
 	selector: 'categories-list',

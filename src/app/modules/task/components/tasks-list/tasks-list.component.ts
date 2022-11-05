@@ -14,9 +14,9 @@ import { EventBusService } from 'src/app/shared/modules/event-bus/event-bus.serv
 import { TaskService } from '../../services/task.service';
 // Types
 import { EventType } from 'src/app/shared/modules/event-bus/types';
-import { Task } from '../../types/task.type';
+import { Task } from '../../config/types/task.type';
 // Constants
-import { TASKS_LIST_TEMPLATE_TEXT } from '../../constants/template.constants';
+import { TASKS_LIST_TEMPLATE_TEXT } from '../../config/constants/template.constants';
 
 @Component({
 	selector: 'tasks-list',
@@ -71,6 +71,7 @@ export class TasksListComponent implements OnInit, OnDestroy {
 
 	private getTasks(): void {
 		this.taskService.getTasks()
+			.pipe(takeUntil(this.destroy$))
 			.subscribe({
 				next: tasks => {
 					this.data$.next(new MatTableDataSource(tasks));

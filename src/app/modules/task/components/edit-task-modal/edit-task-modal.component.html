@@ -17,13 +17,13 @@
 
     <mat-form-field color="accent" appearance="outline">
         <mat-label>{{ TEMPLATE_TEXT.category }}</mat-label>
-        <mat-select formControlName="category">
+        <mat-select formControlName="categoryName">
             <mat-option>{{ TEMPLATE_TEXT.nothing }}</mat-option>
             <mat-option *ngFor="let category of categories$ | async" value={{category.name}}>{{category.name}}</mat-option>
         </mat-select>
     </mat-form-field>
 
-    <mat-checkbox class="mbottom-20" formControlName="priority">Priority?</mat-checkbox>
+    <mat-checkbox class="mbottom-20" formControlName="priority">{{ TEMPLATE_TEXT.priority }}</mat-checkbox>
 
 	<ui-button
 		type="submit"

@@ -11,7 +11,7 @@ import { Observable, of } from 'rxjs';
 import { LocalStorageService } from 'src/app/shared/modules/local-storage/local-storage.service';
 // Types
 import { IValidate } from 'src/app/shared/types/validate.type';
-import { Task } from '../../modules/task/types/task.type';
+import { CreateTask, EditTask, Task } from '../../modules/task/config/types/task.type';
 // Constants
 import { API_TASKS, ApiTaskNames } from '../constants/api.constants';
 import { STORAGE_TASKS, STORAGE_LOGGED_IN } from '../constants/local-storage.constants';
@@ -30,9 +30,9 @@ export class TaskInterceptor implements HttpInterceptor {
 			if (request.url.includes(ApiTaskNames.get)) {
 				return this.getTasks();
 			} else if (request.url.includes(ApiTaskNames.create)) {
-				return this.createTask(request.body as Task);
+				return this.createTask(request.body as CreateTask);
 			} else if (request.url.includes(ApiTaskNames.update)) {
-				return this.updateTask(request.body as Task);
+				return this.updateTask(request.body as EditTask);
 			} else if (request.url.includes(ApiTaskNames.delete)) {
 				const id = +request.url.split('?')[1];
 				return this.deleteTask(id);
@@ -47,23 +47,23 @@ export class TaskInterceptor implements HttpInterceptor {
 	private getTasks(): Observable<HttpEvent<Task[]>> {
 		const loggedIn = this.localStorageService.getItem(STORAGE_LOGGED_IN) as number;
 		const storage = this.localStorageService.getItem(STORAGE_TASKS) as Task[];
-		return of(new HttpResponse<Task[]>({ status: 200, body: storage.filter(task => task.ownerId === loggedIn || task.isGeneral) }));
+		return of(new HttpResponse<Task[]>({ status: 200, body: storage.filter(task => task.ownerId === loggedIn) }));
 	}
 
-	private createTask(task: Task): Observable<HttpEvent<IValidate>> {
+	private createTask(task: CreateTask): Observable<HttpEvent<IValidate>> {
 		const loggedIn = this.localStorageService.getItem(STORAGE_LOGGED_IN) as number;
 		const storage = this.localStorageService.getItem(STORAGE_TASKS) as Task[];
-		task.id = Date.now();
-		task.ownerId = loggedIn;
-		storage.push(task);
+		const newTask: Task = { ...task, id: Date.now(), ownerId: loggedIn };
+		storage.push(newTask);
 		this.localStorageService.setItem(STORAGE_TASKS, storage);
 		return of(new HttpResponse<IValidate>({ status: 200, body: generateIsValidateObj(true, TASK_RESPONSE_MESSAGES.createSuccess) }));
 	}
 
-	private updateTask(task: Task): Observable<HttpEvent<IValidate>> {
+	private updateTask(task: EditTask): Observable<HttpEvent<IValidate>> {
 		const storage = this.localStorageService.getItem(STORAGE_TASKS) as Task[];
 		const index = storage.findIndex(storageTask => storageTask.id === task.id);
-		storage[index] = task;
+		const editedTask: Task = { ...task, name: storage[index].name, ownerId: storage[index].ownerId };
+		storage[index] = editedTask;
 		this.localStorageService.setItem(STORAGE_TASKS, storage);
 		return of(new HttpResponse<IValidate>({ status: 200, body: generateIsValidateObj(true, TASK_RESPONSE_MESSAGES.updateSuccess) }));
 	}

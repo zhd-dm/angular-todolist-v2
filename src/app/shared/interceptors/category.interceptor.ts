@@ -11,7 +11,7 @@ import { Observable, of } from 'rxjs';
 import { LocalStorageService } from 'src/app/shared/modules/local-storage/local-storage.service';
 // Types
 import { IValidate } from 'src/app/shared/types/validate.type';
-import { Category } from '../../modules/category/types/category.type';
+import { Category, CreateCategory, EditCategory } from '../../modules/category/config/types/category.type';
 // Constants
 import { API_CATEGORIES, ApiCategoryNames } from '../constants/api.constants';
 import { STORAGE_CATEGORIES } from '../constants/local-storage.constants';
@@ -30,9 +30,9 @@ export class CategoryInterceptor implements HttpInterceptor {
 			if (request.url.includes(ApiCategoryNames.get)) {
 				return this.getCategories();
 			} else if (request.url.includes(ApiCategoryNames.create)) {
-				return this.createCategory(request.body as Category);
+				return this.createCategory(request.body as CreateCategory);
 			} else if (request.url.includes(ApiCategoryNames.update)) {
-				return this.updateCategory(request.body as Category);
+				return this.updateCategory(request.body as EditCategory);
 			} else if (request.url.includes(ApiCategoryNames.delete)) {
 				const id = +request.url.split('?')[1];
 				return this.deleteCategory(id);
@@ -49,15 +49,15 @@ export class CategoryInterceptor implements HttpInterceptor {
 		return of(new HttpResponse<Category[]>({ status: 200, body: storage }));
 	}
 
-	private createCategory(category: Category): Observable<HttpEvent<IValidate>> {
+	private createCategory(category: CreateCategory): Observable<HttpEvent<IValidate>> {
 		const storage = this.localStorageService.getItem(STORAGE_CATEGORIES) as Category[];
-		category.id = Date.now();
-		storage.push(category);
+		const newCategory = { ...category, id: Date.now() };
+		storage.push(newCategory);
 		this.localStorageService.setItem(STORAGE_CATEGORIES, storage);
 		return of(new HttpResponse<IValidate>({ status: 200, body: generateIsValidateObj(true, CATEGORY_RESPONSE_MESSAGES.createSuccess) }));
 	}
 
-	private updateCategory(category: Category): Observable<HttpEvent<IValidate>> {
+	private updateCategory(category: EditCategory): Observable<HttpEvent<IValidate>> {
 		const storage = this.localStorageService.getItem(STORAGE_CATEGORIES) as Category[];
 		const index = storage.findIndex(storageCategory => storageCategory.id === category.id);
 		storage[index] = category;

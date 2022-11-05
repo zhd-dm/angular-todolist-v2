@@ -1,5 +1,5 @@
 import { ChangeDetectionStrategy, Component } from '@angular/core';
-import { FormControl, FormGroup, Validators } from '@angular/forms';
+import { FormGroup } from '@angular/forms';
 import { Router } from '@angular/router';
 import { MatDialogRef } from '@angular/material/dialog';
 import { take } from 'rxjs';
@@ -10,11 +10,12 @@ import { EventBusService } from 'src/app/shared/modules/event-bus/event-bus.serv
 import { TaskService } from '../../services/task.service';
 import { CategoryService } from 'src/app/modules/category/services/category.service';
 // Types
-import { Task } from '../../types/task.type';
 import { EventType } from 'src/app/shared/modules/event-bus/types';
 // Constants
 import { TASKS_ROUTER_LINKS } from 'src/app/shared/constants/router-link.constants';
-import { CREATE_TASK_MODAL_TEMPLATE_TEXT } from '../../constants/template.constants';
+import { CREATE_TASK_MODAL_TEMPLATE_TEXT } from '../../config/constants/template.constants';
+import { CreateTaskForm, TaskForCreate } from '../../config/types/forms.types';
+import { buildCreateTaskForm } from '../../config/utils/build-forms';
 
 @Component({
 	selector: 'create-task-modal',
@@ -26,12 +27,7 @@ export class CreateTaskModalComponent {
 
 	public categories$ = this.categoryService.getCategories();
 
-	public form = new FormGroup ({
-		name: new FormControl('', [Validators.required, Validators.minLength(5)]),
-		deadline: new FormControl('', [Validators.required]),
-		category: new FormControl(''),
-		priority: new FormControl('')
-	});
+	public form: FormGroup<CreateTaskForm>;
 
 	constructor(
 		private router: Router,
@@ -41,11 +37,13 @@ export class CreateTaskModalComponent {
 		private eventBusService: EventBusService,
 		private taskService: TaskService,
 		private categoryService: CategoryService
-	) {}
+	) {
+		this.form = buildCreateTaskForm(null);
+	}
 
 	public createTask(): void {
 		this.loadingService.startLoad();
-		this.taskService.createTask(this.form.value as Task)
+		this.taskService.createTask(this.form.value as TaskForCreate)
 			.pipe(take(1))
 			.subscribe(response => {
 				this.loadingService.stopLoad();

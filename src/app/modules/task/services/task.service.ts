@@ -3,7 +3,8 @@ import { Observable } from 'rxjs';
 // Services
 import { ApiService } from 'src/app/shared/services/api.service';
 // Types
-import { Task } from '../types/task.type';
+import { Task } from '../config/types/task.type';
+import { TaskForCreate, TaskForEdit } from '../config/types/forms.types';
 import { IValidate } from 'src/app/shared/types/validate.type';
 // Constants
 import { ApiTaskNames, API_TASKS, MethodNames } from 'src/app/shared/constants/api.constants';
@@ -19,11 +20,11 @@ export class TaskService {
 		return this.apiService.sendRequest(MethodNames.get, `${API_TASKS}${ApiTaskNames.get}`);
 	}
 
-	public createTask(task: Task): Observable<IValidate> {
+	public createTask(task: TaskForCreate): Observable<IValidate> {
 		return this.apiService.sendRequest(MethodNames.post, `${API_TASKS}${ApiTaskNames.create}`, task);
 	}
 
-	public updateTask(task: Task): Observable<IValidate> {
+	public updateTask(task: TaskForEdit): Observable<IValidate> {
 		return this.apiService.sendRequest(MethodNames.put, `${API_TASKS}${ApiTaskNames.update}`, task);
 	}
 

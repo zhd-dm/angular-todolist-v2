@@ -1,5 +1,5 @@
 import { ChangeDetectionStrategy, Component, Inject } from '@angular/core';
-import { FormControl, FormGroup, Validators } from '@angular/forms';
+import { FormGroup } from '@angular/forms';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { take } from 'rxjs';
 // Services
@@ -8,10 +8,11 @@ import { CategoryService } from 'src/app/modules/category/services/category.serv
 import { LoadingService } from 'src/app/shared/modules/loading/loading.service';
 import { NotificationService } from 'src/app/shared/modules/notification/notification.service';
 // Types
-import { Task } from '../../types/task.type';
-// Constants
-import { EDIT_TASK_MODAL_TEMPLATE_TEXT } from '../../constants/template.constants';
+import { EditTaskForm, TaskForEdit } from '../../config/types/forms.types';
 
+// Constants
+import { EDIT_TASK_MODAL_TEMPLATE_TEXT } from '../../config/constants/template.constants';
+import { buildEditTaskForm } from '../../config/utils/build-forms';
 @Component({
 	selector: 'edit-task-modal',
 	templateUrl: './edit-task-modal.component.html',
@@ -22,27 +23,22 @@ export class EditTaskModalComponent {
 
 	public categories$ = this.categoryService.getCategories();
 
-	public form: FormGroup;
+	public form: FormGroup<EditTaskForm>;
 
 	constructor(
 		private dialogRef: MatDialogRef<EditTaskModalComponent>,
-		@Inject(MAT_DIALOG_DATA) public data: Task,
+		@Inject(MAT_DIALOG_DATA) public data: TaskForEdit,
 		private taskService: TaskService,
 		private categoryService: CategoryService,
 		private loadingService: LoadingService,
 		private notificationService: NotificationService
 	) {
-		this.form = new FormGroup({
-			name: new FormControl({ value: this.data.name, disabled: true }),
-			deadline: new FormControl(this.data.deadline, [Validators.required]),
-			category: new FormControl(this.data.categoryId),
-			priority: new FormControl(this.data.priority)
-		});
+		this.form = buildEditTaskForm(this.data);
 	}
 
 	public updateTask(): void {
-		const updatedTask = { ...this.data, ...this.form.value };
 		this.loadingService.startLoad();
+		const updatedTask = { ...this.data, ...this.form.value as TaskForEdit };
 		this.taskService.updateTask(updatedTask)
 			.pipe(take(1))
 			.subscribe({
