@@ -16,18 +16,18 @@ export class TaskService {
 	) {}
 
 	public getTasks(): Observable<Task[]> {
-		return this.apiService.sendRequest(MethodNames.get, `${API_TASKS}${ApiTaskNames.get}`) as Observable<Task[]>;
+		return this.apiService.sendRequest(MethodNames.get, `${API_TASKS}${ApiTaskNames.get}`);
 	}
 
 	public createTask(task: Task): Observable<IValidate> {
-		return this.apiService.sendRequest(MethodNames.post, `${API_TASKS}${ApiTaskNames.create}`, task) as Observable<IValidate>;
+		return this.apiService.sendRequest(MethodNames.post, `${API_TASKS}${ApiTaskNames.create}`, task);
 	}
 
 	public updateTask(task: Task): Observable<IValidate> {
-		return this.apiService.sendRequest(MethodNames.put, `${API_TASKS}${ApiTaskNames.update}`, task) as Observable<IValidate>;
+		return this.apiService.sendRequest(MethodNames.put, `${API_TASKS}${ApiTaskNames.update}`, task);
 	}
 
 	public deleteTask(id: number): Observable<IValidate> {
-		return this.apiService.sendRequest(MethodNames.delete, `${API_TASKS}${ApiTaskNames.delete}`, id) as Observable<IValidate>;
+		return this.apiService.sendRequest(MethodNames.delete, `${API_TASKS}${ApiTaskNames.delete}`, id);
 	}
 }

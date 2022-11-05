@@ -11,12 +11,12 @@ export class ApiService {
 		private http: HttpClient
 	) {}
 
-	public sendRequest(method: MethodNames, url: string, body?: unknown): Observable<unknown> {
+	public sendRequest<T>(method: MethodNames, url: string, body?: unknown): Observable<T> {
 		switch(method) {
-		case MethodNames.get: return this.http.get<unknown>(BASE_URL + url);
-		case MethodNames.post: return this.http.post<unknown>(BASE_URL + url, body);
-		case MethodNames.put: return this.http.put<unknown>(BASE_URL + url, body);
-		case MethodNames.delete: return this.http.delete<unknown>(BASE_URL + url + `?${body as number}`);
+		case MethodNames.get: return this.http.get<T>(BASE_URL + url);
+		case MethodNames.post: return this.http.post<T>(BASE_URL + url, body);
+		case MethodNames.put: return this.http.put<T>(BASE_URL + url, body);
+		case MethodNames.delete: return this.http.delete<T>(BASE_URL + url + `?${body as number}`);
 		}
 	}
 }

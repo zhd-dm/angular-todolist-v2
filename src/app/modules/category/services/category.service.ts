@@ -16,18 +16,18 @@ export class CategoryService {
 	) {}
 
 	public getCategories(): Observable<Category[]> {
-		return this.apiService.sendRequest(MethodNames.get, `${API_CATEGORIES}${ApiCategoryNames.get}`) as Observable<Category[]>;
+		return this.apiService.sendRequest(MethodNames.get, `${API_CATEGORIES}${ApiCategoryNames.get}`);
 	}
 
 	public createCategory(category: Category): Observable<IValidate> {
-		return this.apiService.sendRequest(MethodNames.post, `${API_CATEGORIES}${ApiCategoryNames.create}`, category) as Observable<IValidate>;
+		return this.apiService.sendRequest(MethodNames.post, `${API_CATEGORIES}${ApiCategoryNames.create}`, category);
 	}
 
 	public updateCategory(category: Category): Observable<IValidate> {
-		return this.apiService.sendRequest(MethodNames.put, `${API_CATEGORIES}${ApiCategoryNames.update}`, category) as Observable<IValidate>;
+		return this.apiService.sendRequest(MethodNames.put, `${API_CATEGORIES}${ApiCategoryNames.update}`, category);
 	}
 
 	public deleteCategory(id: number): Observable<IValidate> {
-		return this.apiService.sendRequest(MethodNames.delete, `${API_CATEGORIES}${ApiCategoryNames.delete}`, id) as Observable<IValidate>;
+		return this.apiService.sendRequest(MethodNames.delete, `${API_CATEGORIES}${ApiCategoryNames.delete}`, id);
 	}
 }

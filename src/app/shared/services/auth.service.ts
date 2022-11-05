@@ -32,11 +32,11 @@ export class AuthService {
 
 	public logIn(user: User): Observable<IValidate> {
 		this.loadingService.startLoad();
-		return this.apiService.sendRequest(MethodNames.post, `${API_USERS}${ApiAuthNames.login}`, user) as Observable<IValidate>;
+		return this.apiService.sendRequest(MethodNames.post, `${API_USERS}${ApiAuthNames.login}`, user);
 	}
 
 	public register(user: User): Observable<IValidate> {
-		return this.apiService.sendRequest(MethodNames.post, `${API_USERS}${ApiAuthNames.register}`, user) as Observable<IValidate>;
+		return this.apiService.sendRequest(MethodNames.post, `${API_USERS}${ApiAuthNames.register}`, user);
 	}
 
 	public logOut(): void {
