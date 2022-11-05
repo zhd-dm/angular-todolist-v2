@@ -13,7 +13,6 @@ import { EditTaskModalComponent } from './components/edit-task-modal/edit-task-m
 // Services
 import { TaskService } from './services/task.service';
 import { CategoryService } from '../category/services/category.service';
-import { NotificationService } from 'src/app/shared/services/notification.service';
 
 
 
@@ -33,8 +32,7 @@ import { NotificationService } from 'src/app/shared/services/notification.servic
 	],
 	providers: [
 		TaskService,
-		CategoryService,
-		NotificationService
+		CategoryService
 	]
 })
 export class TaskModule { }

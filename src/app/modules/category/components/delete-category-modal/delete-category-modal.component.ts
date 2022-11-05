@@ -3,8 +3,8 @@ import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { take } from 'rxjs';
 // Services
 import { CategoryService } from '../../services/category.service';
-import { LoadingService } from 'src/app/shared/services/loading.service';
-import { NotificationService } from 'src/app/shared/services/notification.service';
+import { LoadingService } from 'src/app/shared/modules/loading/loading.service';
+import { NotificationService } from 'src/app/shared/modules/notification/notification.service';
 // Constants
 import { DELETE_CATEGORY_MODAL_TEMPLATE_TEXT } from '../../constants/template.constants';
 

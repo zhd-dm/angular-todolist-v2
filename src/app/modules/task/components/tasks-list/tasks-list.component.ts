@@ -8,7 +8,7 @@ import { MatTableDataSource } from '@angular/material/table';
 import { CreateTaskModalComponent } from '../create-task-modal/create-task-modal.component';
 import { DeleteTaskModalComponent } from '../delete-task-modal/delete-task-modal.component';
 import { EditTaskModalComponent } from '../edit-task-modal/edit-task-modal.component';
-import { LoadingService } from 'src/app/shared/services/loading.service';
+import { LoadingService } from 'src/app/shared/modules/loading/loading.service';
 import { AuthService } from 'src/app/shared/services/auth.service';
 import { EventBusService } from 'src/app/shared/modules/event-bus/event-bus.service';
 import { TaskService } from '../../services/task.service';

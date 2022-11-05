@@ -4,8 +4,8 @@ import { Router } from '@angular/router';
 import { MatDialogRef } from '@angular/material/dialog';
 import { take } from 'rxjs';
 // Services
-import { LoadingService } from 'src/app/shared/services/loading.service';
-import { NotificationService } from 'src/app/shared/services/notification.service';
+import { LoadingService } from 'src/app/shared/modules/loading/loading.service';
+import { NotificationService } from 'src/app/shared/modules/notification/notification.service';
 import { EventBusService } from 'src/app/shared/modules/event-bus/event-bus.service';
 import { TaskService } from '../../services/task.service';
 import { CategoryService } from 'src/app/modules/category/services/category.service';

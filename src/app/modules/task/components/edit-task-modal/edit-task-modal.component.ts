@@ -5,8 +5,8 @@ import { take } from 'rxjs';
 // Services
 import { TaskService } from '../../services/task.service';
 import { CategoryService } from 'src/app/modules/category/services/category.service';
-import { LoadingService } from 'src/app/shared/services/loading.service';
-import { NotificationService } from 'src/app/shared/services/notification.service';
+import { LoadingService } from 'src/app/shared/modules/loading/loading.service';
+import { NotificationService } from 'src/app/shared/modules/notification/notification.service';
 // Types
 import { Task } from '../../types/task.type';
 // Constants

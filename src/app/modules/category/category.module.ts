@@ -11,7 +11,6 @@ import { CategoryService } from './services/category.service';
 import { CreateCategoryModalComponent } from './components/create-category-modal/create-category-modal.component';
 import { DeleteCategoryModalComponent } from './components/delete-category-modal/delete-category-modal.component';
 // Services
-import { NotificationService } from 'src/app/shared/services/notification.service';
 import { EditCategoryModalComponent } from './components/edit-category-modal/edit-category-modal.component';
 
 
@@ -31,8 +30,7 @@ import { EditCategoryModalComponent } from './components/edit-category-modal/edi
 		SharedModule
 	],
 	providers: [
-		CategoryService,
-		NotificationService
+		CategoryService
 	]
 })
 export class CategoryModule { }

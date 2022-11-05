@@ -4,8 +4,8 @@ import { Router } from '@angular/router';
 import { take } from 'rxjs';
 // Services
 import { CategoryService } from '../../services/category.service';
-import { LoadingService } from 'src/app/shared/services/loading.service';
-import { NotificationService } from 'src/app/shared/services/notification.service';
+import { LoadingService } from 'src/app/shared/modules/loading/loading.service';
+import { NotificationService } from 'src/app/shared/modules/notification/notification.service';
 // Types
 import { Category } from '../../types/category.type';
 // Constants

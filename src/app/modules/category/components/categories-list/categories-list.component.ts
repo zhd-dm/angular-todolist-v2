@@ -8,7 +8,7 @@ import { CreateCategoryModalComponent } from '../create-category-modal/create-ca
 import { DeleteCategoryModalComponent } from '../delete-category-modal/delete-category-modal.component';
 import { EditCategoryModalComponent } from '../edit-category-modal/edit-category-modal.component';
 import { CategoryService } from '../../services/category.service';
-import { LoadingService } from 'src/app/shared/services/loading.service';
+import { LoadingService } from 'src/app/shared/modules/loading/loading.service';
 import { EventBusService } from 'src/app/shared/modules/event-bus/event-bus.service';
 import { AuthService } from 'src/app/shared/services/auth.service';
 // Types

@@ -8,7 +8,7 @@ import {
 } from '@angular/common/http';
 import { Observable, of } from 'rxjs';
 // Services
-import { LocalStorageService } from 'src/app/shared/services/local-storage.service';
+import { LocalStorageService } from 'src/app/shared/modules/local-storage/local-storage.service';
 // Types
 import { IValidate } from 'src/app/shared/types/validate.type';
 import { Task } from '../../modules/task/types/task.type';

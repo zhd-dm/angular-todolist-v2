@@ -8,7 +8,7 @@ import {
 } from '@angular/common/http';
 import { Observable, of } from 'rxjs';
 // Services
-import { LocalStorageService } from '../services/local-storage.service';
+import { LocalStorageService } from '../modules/local-storage/local-storage.service';
 // Types
 import { User } from '../types/user.type';
 import { LoginUser, RegisterUser } from '../types/user.type';
@@ -46,7 +46,7 @@ export class AuthInterceptor implements HttpInterceptor {
 		return of(new HttpResponse<IValidate>({ status: 200, body: isValidate }));
 	}
 
-	private registrationUser(user: Omit<User, 'id'>): Observable<HttpEvent<IValidate>> {
+	private registrationUser(user: LoginUser): Observable<HttpEvent<IValidate>> {
 		const isValidate: IValidate = this.checkUser(user);
 		return of(new HttpResponse<IValidate>({ status: 200, body: isValidate }));
 	}

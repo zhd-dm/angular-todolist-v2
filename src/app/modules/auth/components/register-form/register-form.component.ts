@@ -4,8 +4,8 @@ import { Router } from '@angular/router';
 import { take } from 'rxjs';
 // Services
 import { AuthService } from 'src/app/shared/services/auth.service';
-import { LoadingService } from 'src/app/shared/services/loading.service';
-import { NotificationService } from 'src/app/shared/services/notification.service';
+import { LoadingService } from 'src/app/shared/modules/loading/loading.service';
+import { NotificationService } from 'src/app/shared/modules/notification/notification.service';
 // Types
 import { RegisterUserForm, UserForRegister } from '../../config/types/forms.types';
 import { IValidate } from 'src/app/shared/types/validate.type';

@@ -3,8 +3,8 @@ import { take } from 'rxjs';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 // Services
 import { TaskService } from '../../services/task.service';
-import { LoadingService } from 'src/app/shared/services/loading.service';
-import { NotificationService } from 'src/app/shared/services/notification.service';
+import { LoadingService } from 'src/app/shared/modules/loading/loading.service';
+import { NotificationService } from 'src/app/shared/modules/notification/notification.service';
 // Constants
 import { DELETE_TASK_MODAL_TEMPLATE_TEXT } from '../../constants/template.constants';
 
