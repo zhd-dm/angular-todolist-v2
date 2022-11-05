@@ -7,7 +7,7 @@ export const LOGIN_TEMPLATE_TEXT = {
 
 export const REGISTER_TEMPLATE_TEXT = {
 	register: 'Registration',
-	username: 'Username',
+	name: 'Username',
 	email: 'E-mail',
 	password: 'Password',
 	repeatPassword: 'Repeat password',

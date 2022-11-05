@@ -1,5 +1,5 @@
 import { ChangeDetectionStrategy, Component } from '@angular/core';
-import { AbstractControl, FormControl, FormGroup, ValidationErrors, ValidatorFn, Validators } from '@angular/forms';
+import { FormGroup } from '@angular/forms';
 import { Router } from '@angular/router';
 import { take } from 'rxjs';
 // Services
@@ -7,11 +7,13 @@ import { AuthService } from 'src/app/shared/services/auth.service';
 import { LoadingService } from 'src/app/shared/services/loading.service';
 import { NotificationService } from 'src/app/shared/services/notification.service';
 // Types
-import { User } from 'src/app/shared/types/user.type';
+import { RegisterUserForm, UserForRegisterForm } from '../../config/types/forms.types';
 import { IValidate } from 'src/app/shared/types/validate.type';
 // Constants
-import { REGISTER_TEMPLATE_TEXT } from '../../constants/template.constants';
+import { REGISTER_TEMPLATE_TEXT } from '../../config/constants/template.constants';
 import { TASKS_ROUTER_LINKS } from 'src/app/shared/constants/router-link.constants';
+// Utils
+import { buildRegisterForm } from '../../config/utils/build-forms';
 
 @Component({
 	selector: 'register-form',
@@ -21,7 +23,7 @@ import { TASKS_ROUTER_LINKS } from 'src/app/shared/constants/router-link.constan
 export class RegisterFormComponent {
 	public TEMPLATE_TEXT = REGISTER_TEMPLATE_TEXT;
 
-	public form: FormGroup;
+	public form: FormGroup<RegisterUserForm>;
 
 	constructor(
 		private router: Router,
@@ -29,24 +31,20 @@ export class RegisterFormComponent {
 		private loadingService: LoadingService,
 		private notificationService: NotificationService
 	) {
-		this.form = new FormGroup({
-			username: new FormControl('', [
-				Validators.required, Validators.minLength(3), Validators.maxLength(9)
-			]),
-			email: new FormControl('', [Validators.required, Validators.email]),
-			password: new FormControl('', [Validators.required, Validators.minLength(5), Validators.maxLength(16)]),
-			repeatPassword: new FormControl('', [Validators.required, Validators.minLength(5), Validators.maxLength(16)])
-		}, { validators: this.checkPasswords });
+		this.form = buildRegisterForm(null);
 	}
 
 	public register(): void {
 		this.loadingService.startLoad();
-		this.authService.register(this.form.value as User)
+		// eslint-disable-next-line @typescript-eslint/no-unused-vars
+		const { repeatPassword, ...user } = this.form.value as UserForRegisterForm;
+		this.authService.register(user)
 			.pipe(take(1))
 			.subscribe({
 				next: res => {
 					this.loadingService.stopLoad();
-					this.notificationService.openSnackBar((res as IValidate).message);if ((res as IValidate).status) {
+					this.notificationService.openSnackBar((res as IValidate).message);
+					if ((res as IValidate).status) {
 						this.authService.isAuth$.next(true);
 						this.router.navigate([TASKS_ROUTER_LINKS.tasksList]);
 					}
@@ -56,10 +54,4 @@ export class RegisterFormComponent {
 				}
 			});
 	}
-
-	private checkPasswords: ValidatorFn = (form: AbstractControl):  ValidationErrors | null => {
-		const pass = form.get('password')?.value;
-		const confirmPass = form.get('repeatPassword')?.value;
-		return pass === confirmPass ? null : { notSame: true };
-	};
 }
