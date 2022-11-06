@@ -1,15 +1,17 @@
 import { Injectable } from '@angular/core';
-import { BehaviorSubject } from 'rxjs';
+import { ReplaySubject } from 'rxjs';
 
 @Injectable()
 export class LoadingService {
-	public loading$ = new BehaviorSubject<boolean>(false);
+	public loading$ = new ReplaySubject<boolean>(1);
 
 	public startLoad(): void {
 		this.loading$.next(true);
 	}
 
 	public stopLoad(): void {
-		this.loading$.next(false);
+		setTimeout(() => {
+			this.loading$.next(false);
+		}, 500);
 	}
 }

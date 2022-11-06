@@ -19,6 +19,7 @@ import { UiSpinnerComponent } from './components/ui-spinner/ui-spinner.component
 		UiSpinnerComponent
 	],
 	exports: [
+		LoadingModule,
 		HeaderComponent,
 		UiButtonComponent,
 		UiInputComponent,

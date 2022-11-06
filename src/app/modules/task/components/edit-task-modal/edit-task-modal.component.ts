@@ -43,13 +43,12 @@ export class EditTaskModalComponent {
 			.pipe(take(1))
 			.subscribe({
 				next: response => {
-					this.dialogRef.close();
 					this.notificationService.openSnackBar(response.message || '');
 				},
 				error: error => {
-					this.dialogRef.close();
 					console.error(error);
 				}
 			});
+		this.dialogRef.close();
 	}
 }

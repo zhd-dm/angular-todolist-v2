@@ -42,7 +42,6 @@ export class CategoriesListComponent implements OnInit, OnDestroy {
 	) {}
 
 	ngOnInit(): void {
-		this.loadingService.startLoad();
 		this.getCategories();
 		this.eventBusSubscribe();
 		this.authService.currentUrl$.next(EventType.CATEGORY_URL);
@@ -68,6 +67,7 @@ export class CategoriesListComponent implements OnInit, OnDestroy {
 	}
 
 	private getCategories(): void {
+		this.loadingService.startLoad();
 		this.categoryService.getCategories()
 			.subscribe({
 				next: categories => {
@@ -75,7 +75,10 @@ export class CategoriesListComponent implements OnInit, OnDestroy {
 					this.data$.value.sort = this.sort;
 					this.loadingService.stopLoad();
 				},
-				error: error => console.log(error)
+				error: error => {
+					console.log(error);
+					this.loadingService.stopLoad();
+				}
 			});
 	}
 

@@ -1,14 +1,14 @@
 import { Directive, Input, TemplateRef, ViewContainerRef } from '@angular/core';
 
 @Directive({
-	selector: '[ui-loader]'
+	selector: '[loader]'
 })
 export class LoadingDirective {
 	@Input()
-	set hasView(condition: boolean) {
-		if (condition && this.hasView) {
+	set loader(isLoad: boolean) {
+		if (isLoad) {
 			this.viewContainer.createEmbeddedView(this.templateRef);
-		} else if (!condition && !this.hasView) {
+		} else if (!isLoad) {
 			this.viewContainer.clear();
 		}
 	}

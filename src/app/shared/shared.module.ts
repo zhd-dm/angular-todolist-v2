@@ -5,7 +5,6 @@ import { MaterialModule } from './modules/material/material.module';
 import { UIModule } from './modules/UI/ui.module';
 import { NotificationModule } from './modules/notification/notification.module';
 import { LocalStorageModule } from './modules/local-storage/local-storage.module';
-import { LoadingModule } from './modules/loading/loading.module';
 // Interceptors
 import { AuthInterceptor } from './interceptors/auth.interceptor';
 import { TaskInterceptor } from './interceptors/task.interceptor';
@@ -21,8 +20,7 @@ import { ApiService } from './services/api.service';
 		MaterialModule,
 		UIModule,
 		NotificationModule,
-		LocalStorageModule,
-		LoadingModule
+		LocalStorageModule
 	],
 	exports: [
 		MaterialModule,

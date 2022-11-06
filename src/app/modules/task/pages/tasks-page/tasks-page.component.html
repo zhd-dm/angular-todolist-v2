@@ -1,2 +1,2 @@
 <tasks-list></tasks-list>
-<ui-spinner></ui-spinner>
+<ui-spinner *loader="(loading$ | async) || false"></ui-spinner>

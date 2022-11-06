@@ -2,7 +2,6 @@ import { Injectable } from '@angular/core';
 import { BehaviorSubject, Observable, ReplaySubject } from 'rxjs';
 // Services
 import { ApiService } from './api.service';
-import { LoadingService } from '../modules/loading/loading.service';
 import { LocalStorageService } from '../modules/local-storage/local-storage.service';
 // Types
 import { EventType } from '../modules/event-bus/types';
@@ -22,7 +21,6 @@ export class AuthService {
 
 	constructor(
 		private apiService: ApiService,
-		private loadingService: LoadingService,
 		private localStorageService: LocalStorageService
 	) {
 		if (this.localStorageService.getItem(STORAGE_LOGGED_IN) as number > 0) {
@@ -31,7 +29,6 @@ export class AuthService {
 	}
 
 	public logIn(user: LoginUser): Observable<IValidate> {
-		this.loadingService.startLoad();
 		return this.apiService.sendRequest(MethodNames.post, `${API_USERS}${ApiAuthNames.login}`, user);
 	}
 

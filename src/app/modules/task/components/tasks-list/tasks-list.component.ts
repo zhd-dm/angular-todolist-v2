@@ -44,7 +44,6 @@ export class TasksListComponent implements OnInit, OnDestroy {
 	) {}
 
 	ngOnInit(): void {
-		this.loadingService.startLoad();
 		this.getTasks();
 		this.eventBusSubscribe();
 		this.authService.currentUrl$.next(EventType.TASK_URL);
@@ -70,6 +69,7 @@ export class TasksListComponent implements OnInit, OnDestroy {
 	}
 
 	private getTasks(): void {
+		this.loadingService.startLoad();
 		this.taskService.getTasks()
 			.pipe(takeUntil(this.destroy$))
 			.subscribe({

@@ -46,7 +46,6 @@ export class CreateCategoryModalComponent {
 		this.categoryService.createCategory(this.form.value as Category)
 			.pipe(take(1))
 			.subscribe(response => {
-				this.loadingService.stopLoad();
 				this.notificationService.openSnackBar(response.message || '');
 				if (response.status) {
 					this.goTo(this.ROUTER_LINKS.categoriesList);

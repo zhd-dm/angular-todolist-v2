@@ -45,12 +45,17 @@ export class CreateTaskModalComponent {
 		this.loadingService.startLoad();
 		this.taskService.createTask(this.form.value as TaskForCreate)
 			.pipe(take(1))
-			.subscribe(response => {
-				this.loadingService.stopLoad();
-				this.notificationService.openSnackBar(response.message || '');
-				if (response.status) {
-					this.goTo(TASKS_ROUTER_LINKS.tasksList);
-					this.eventBusService.push({ type: EventType.UPDATE_TASK_LIST });
+			.subscribe({
+				next: response => {
+					this.notificationService.openSnackBar(response.message || '');
+					if (response.status) {
+						this.goTo(TASKS_ROUTER_LINKS.tasksList);
+						this.eventBusService.push({ type: EventType.UPDATE_TASK_LIST });
+					}
+				},
+				error: error => {
+					this.dialogRef.close();
+					console.error(error);
 				}
 			});
 		this.dialogRef.close();

@@ -9,6 +9,7 @@ import { LoadingDirective } from './loading.directive';
 
 @NgModule({
 	declarations: [ LoadingDirective ],
+	exports: [ LoadingDirective ],
 	imports: [ CommonModule ],
 	providers: [ LoadingService ]
 })
