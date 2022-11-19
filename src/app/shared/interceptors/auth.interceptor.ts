@@ -10,8 +10,7 @@ import { Observable, of } from 'rxjs';
 // Services
 import { LocalStorageService } from '../modules/local-storage/local-storage.service';
 // Types
-import { User } from '../types/user.type';
-import { LoginUser, RegisterUser } from '../types/user.type';
+import { User, LoginUser, RegisterUser } from '../types/user.type';
 import { IValidate } from '../types/validate.type';
 // Constants
 import { API_USERS, ApiAuthNames } from '../constants/api.constants';

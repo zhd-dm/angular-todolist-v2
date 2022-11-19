@@ -11,7 +11,7 @@ export class NotificationService {
 		private snackBar: MatSnackBar
 	) {}
 
-	openSnackBar(message = 'Snackbar', btnCloseText = 'Close') {
+	openSnackBar(message = 'Snackbar', btnCloseText = 'Close'): void {
 		this.snackBar.open(message, btnCloseText, {
 			horizontalPosition: this.horizontalPosition,
 			verticalPosition: this.verticalPosition,

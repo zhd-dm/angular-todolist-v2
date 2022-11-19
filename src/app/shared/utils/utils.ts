@@ -13,5 +13,6 @@ export const generateSuccessResponse = (body: unknown, status = 200): Observable
 };
 
 export const isRegisterUser = (user: LoginUser | RegisterUser): user is RegisterUser => {
+	// eslint-disable-next-line no-undefined
 	return (user as RegisterUser).name !== undefined;
 };
