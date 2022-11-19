@@ -1,27 +1,33 @@
 # AngularTodolistV2
 
-This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 14.0.2.
+# :ru:
 
-## Development server
+Вторая версия [прошлого todo-листа](https://github.com/zhd-dm/angular-todolist) -> [Новая версия](https://zhd-dm.github.io/angular-todolist-v2/).
 
-Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The application will automatically reload if you change any of the source files.
+## Запуск локально
 
-## Code scaffolding
+1. git clone https://github.com/zhd-dm/angular-todolist-v2.git
+2. npm i
+3. npm run start
+4. Перейти в браузере на localhost:4200
 
-Run `ng generate component component-name` to generate a new component. You can also use `ng generate directive|pipe|service|class|guard|interface|enum|module`.
+## Руководство пользователя
 
-## Build
+В процессе...
 
-Run `ng build` to build the project. The build artifacts will be stored in the `dist/` directory.
+<hr>
 
-## Running unit tests
+# :us:
 
-Run `ng test` to execute the unit tests via [Karma](https://karma-runner.github.io).
+The second version of the [previous todo-list](https://github.com/zhd-dm/angular-todolist) -> [New version](https://zhd-dm.github.io/angular-todolist-v2/).
 
-## Running end-to-end tests
+## Run in local
 
-Run `ng e2e` to execute the end-to-end tests via a platform of your choice. To use this command, you need to first add a package that implements end-to-end testing capabilities.
+1. git clone https://github.com/zhd-dm/angular-todolist-v2.git
+2. npm i
+3. npm run start
+4. Go to localhost:4200 in browser
 
-## Further help
+## User story
 
-To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI Overview and Command Reference](https://angular.io/cli) page.
+In process...
