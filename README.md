@@ -6,9 +6,9 @@
 
 ## Запуск локально
 
-1. git clone https://github.com/zhd-dm/angular-todolist-v2.git
-2. npm i
-3. npm run start
+1. `git clone https://github.com/zhd-dm/angular-todolist-v2.git`
+2. `npm i`
+3. `npm run start`
 4. Перейти в браузере на localhost:4200
 
 ## Руководство пользователя
@@ -23,9 +23,9 @@ The second version of the [previous todo-list](https://github.com/zhd-dm/angular
 
 ## Run in local
 
-1. git clone https://github.com/zhd-dm/angular-todolist-v2.git
-2. npm i
-3. npm run start
+1. `git clone https://github.com/zhd-dm/angular-todolist-v2.git`
+2. `npm i`
+3. `npm run start`
 4. Go to localhost:4200 in browser
 
 ## User story
