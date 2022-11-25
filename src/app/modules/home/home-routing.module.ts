@@ -14,6 +14,10 @@ const routes: Routes = [
 	{
 		path: 'categories',
 		loadChildren: () => import('../category/category.module').then(module => module.CategoryModule)
+	},
+	{
+		path: '**',
+		redirectTo: '/home/tasks'
 	}
 ];
 

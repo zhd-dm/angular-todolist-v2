@@ -7,8 +7,9 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 // Modules
 import { SharedModule } from './shared/shared.module';
-// services
+// Guards
 import { AuthGuard } from './shared/guards/auth.guard';
+import { HomeGuard } from './shared/guards/home.guard';
 
 @NgModule({
 	declarations: [
@@ -22,6 +23,6 @@ import { AuthGuard } from './shared/guards/auth.guard';
 		SharedModule
 	],
 	bootstrap: [AppComponent],
-	providers: [AuthGuard]
+	providers: [AuthGuard, HomeGuard]
 })
 export class AppModule { }

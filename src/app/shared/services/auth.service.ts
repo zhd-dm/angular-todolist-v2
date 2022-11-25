@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { BehaviorSubject, Observable, ReplaySubject } from 'rxjs';
+import { BehaviorSubject, Observable, of, ReplaySubject } from 'rxjs';
 // Services
 import { ApiService } from './api.service';
 import { LocalStorageService } from '../modules/local-storage/local-storage.service';
@@ -39,5 +39,9 @@ export class AuthService {
 	public logOut(): void {
 		this.isAuth$.next(false);
 		this.localStorageService.removeItem(STORAGE_LOGGED_IN);
+	}
+
+	public isLoggedIn(): Observable<boolean> {
+		return of(this.localStorageService.getItem(STORAGE_LOGGED_IN) as number > 0);
 	}
 }

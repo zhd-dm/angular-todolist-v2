@@ -39,7 +39,7 @@ export class HeaderComponent implements OnInit {
 	public logOut(): void {
 		this.authService.logOut();
 		this.eventBusService.push({ type: EventType.LOGOUT });
-		this.goTo(ROUTER_LINKS.home);
+		this.goTo(ROUTER_LINKS.auth);
 	}
 
 	public checkNavigate(link: EventType): void {
