@@ -56,7 +56,7 @@ export class TaskInterceptor implements HttpInterceptor {
 		const newTask: Task = { ...task, id: Date.now(), ownerId: loggedIn };
 		storage.push(newTask);
 		this.localStorageService.setItem(STORAGE_TASKS, storage);
-		return of(new HttpResponse<IValidate>({ status: 200, body: generateIsValidateObj(TASK_RESPONSE_MESSAGES.createSuccess) }));
+		return of(new HttpResponse<IValidate>({ status: 200, body: generateIsValidateObj(true, TASK_RESPONSE_MESSAGES.createSuccess) }));
 	}
 
 	private updateTask(task: EditTask): Observable<HttpEvent<IValidate>> {
@@ -65,7 +65,7 @@ export class TaskInterceptor implements HttpInterceptor {
 		const editedTask: Task = { ...task, name: storage[index].name, ownerId: storage[index].ownerId };
 		storage[index] = editedTask;
 		this.localStorageService.setItem(STORAGE_TASKS, storage);
-		return of(new HttpResponse<IValidate>({ status: 200, body: generateIsValidateObj(TASK_RESPONSE_MESSAGES.updateSuccess) }));
+		return of(new HttpResponse<IValidate>({ status: 200, body: generateIsValidateObj(true, TASK_RESPONSE_MESSAGES.updateSuccess) }));
 	}
 
 	private deleteTask(id: number): Observable<HttpEvent<IValidate>> {
@@ -73,7 +73,7 @@ export class TaskInterceptor implements HttpInterceptor {
 		const index = storage.findIndex(task => task.id === id);
 		storage.splice(index, 1);
 		this.localStorageService.setItem(STORAGE_TASKS, storage);
-		return of(new HttpResponse<IValidate>({ status: 200, body: generateIsValidateObj(TASK_RESPONSE_MESSAGES.deleteSuccess) }));
+		return of(new HttpResponse<IValidate>({ status: 200, body: generateIsValidateObj(true, TASK_RESPONSE_MESSAGES.deleteSuccess) }));
 	}
 
 	//----------------------------------------------------------------------------//

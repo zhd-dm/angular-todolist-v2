@@ -54,7 +54,7 @@ export class CategoryInterceptor implements HttpInterceptor {
 		const newCategory = { ...category, id: Date.now() };
 		storage.push(newCategory);
 		this.localStorageService.setItem(STORAGE_CATEGORIES, storage);
-		return of(new HttpResponse<IValidate>({ status: 200, body: generateIsValidateObj(CATEGORY_RESPONSE_MESSAGES.createSuccess) }));
+		return of(new HttpResponse<IValidate>({ status: 200, body: generateIsValidateObj(true, CATEGORY_RESPONSE_MESSAGES.createSuccess) }));
 	}
 
 	private updateCategory(category: EditCategory): Observable<HttpEvent<IValidate>> {
@@ -62,7 +62,7 @@ export class CategoryInterceptor implements HttpInterceptor {
 		const index = storage.findIndex(storageCategory => storageCategory.id === category.id);
 		storage[index] = category;
 		this.localStorageService.setItem(STORAGE_CATEGORIES, storage);
-		return of(new HttpResponse<IValidate>({ status: 200, body: generateIsValidateObj(CATEGORY_RESPONSE_MESSAGES.updateSuccess) }));
+		return of(new HttpResponse<IValidate>({ status: 200, body: generateIsValidateObj(true, CATEGORY_RESPONSE_MESSAGES.updateSuccess) }));
 	}
 
 	private deleteCategory(id: number): Observable<HttpEvent<IValidate>> {
@@ -70,7 +70,7 @@ export class CategoryInterceptor implements HttpInterceptor {
 		const index = storage.findIndex(category => category.id === id);
 		storage.splice(index, 1);
 		this.localStorageService.setItem(STORAGE_CATEGORIES, storage);
-		return of(new HttpResponse<IValidate>({ status: 200, body: generateIsValidateObj(CATEGORY_RESPONSE_MESSAGES.deleteSuccess) }));
+		return of(new HttpResponse<IValidate>({ status: 200, body: generateIsValidateObj(true, CATEGORY_RESPONSE_MESSAGES.deleteSuccess) }));
 	}
 
 	//----------------------------------------------------------------------------//
