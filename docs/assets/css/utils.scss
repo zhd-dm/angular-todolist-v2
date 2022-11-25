@@ -1,0 +1,124 @@
+:root {
+
+	// Width Height
+	.width-100 {
+		width: 100%;
+	}
+
+	.height-100 {
+		height: 100%;
+	}
+
+	.wh-100 {
+		width: 100%;
+		height: 100%;
+	}
+
+	//----------------------------------//
+
+	// Flex
+
+	.flex {
+		display: flex;
+	}
+
+	//----------------------------------//
+
+	// Flex direction
+
+	.flex-column {
+		display: flex;
+		flex-direction: column;
+	}
+
+	// Justify content
+
+	.justify-center {
+		display: flex;
+		justify-content: center;
+	}
+
+	.justify-start {
+		display: flex;
+		justify-content: flex-start;
+	}
+
+	.justify-end {
+		display: flex;
+		justify-content: flex-end;
+	}
+
+	//----------------------------------//
+
+	// Align items
+
+	.align-center {
+		display: flex;
+		align-items: center;
+	}
+
+	.-align-flex-start {
+		display: flex;
+		align-items: flex-start;
+	}
+
+	.align-flex-end {
+		display: flex;
+		align-items: flex-end;
+	}
+
+	//----------------------------------//
+
+	// Justify content + ALign items
+
+	.justify-align-center {
+		display: flex;
+		justify-content: center;
+		align-items: center;
+	}
+
+	//----------------------------------//
+
+	// Buttons colors
+
+	.btn-primary {
+		background-color: var(--color-primary);
+		color: var(--color-white);
+	}
+
+	.btn-accent {
+		background-color: var(--color-accent);
+		color: var(--color-basic);
+	}
+
+	.btn-warn {
+		background-color: var(--color-warn);
+		color: var(--color-white);
+	}
+
+	.btn-icon-primary {
+		color: var(--color-primary);
+	}
+
+	.btn-icon-accent {
+		color: var(--color-accent);
+	}
+
+	.btn-icon-warn {
+		color: var(--color-warn);
+	}
+
+	//----------------------------------//
+
+	// Margins
+
+	.mtop-12 {
+		margin-top: var(--size-12);
+	}
+
+	.mbottom-20 {
+		margin-bottom: var(--size-20);
+	}
+
+	//----------------------------------//
+}
