@@ -58,15 +58,15 @@ export class AuthInterceptor implements HttpInterceptor {
 				if (!isRegisterUser(user)) {
 					if (user.email.toLowerCase() === storage[i].email && user.password === storage[i].password) {
 						this.localStorageService.setItem(STORAGE_LOGGED_IN, storage[i].id);
-						return generateIsValidateObj(true, AUTH_RESPONSE_MESSAGES.loginSuccess);
+						return generateIsValidateObj(AUTH_RESPONSE_MESSAGES.loginSuccess);
 					} else if (user.email.toLowerCase() === storage[i].email && user.password !== storage[i].password) {
-						return generateIsValidateObj(false, AUTH_RESPONSE_MESSAGES.passwordIncorrect);
+						return generateIsValidateObj(AUTH_RESPONSE_MESSAGES.passwordIncorrect);
 					} else {
-						return generateIsValidateObj(false, AUTH_RESPONSE_MESSAGES.userNotFound);
+						return generateIsValidateObj(AUTH_RESPONSE_MESSAGES.userNotFound);
 					}
 				} else {
 					if (storage.find(item => user.email.toLowerCase() === item.email)) {
-						return generateIsValidateObj(false, AUTH_RESPONSE_MESSAGES.emailIsBusy);
+						return generateIsValidateObj(AUTH_RESPONSE_MESSAGES.emailIsBusy);
 					} else {
 						return this.saveUser(user, storage);
 					}
@@ -74,7 +74,7 @@ export class AuthInterceptor implements HttpInterceptor {
 			}
 		} else {
 			if (!isRegisterUser(user)) {
-				return generateIsValidateObj(false, AUTH_RESPONSE_MESSAGES.userNotFound);
+				return generateIsValidateObj(AUTH_RESPONSE_MESSAGES.userNotFound);
 			} else {
 				return this.saveUser(user, storage);
 			}
@@ -90,7 +90,7 @@ export class AuthInterceptor implements HttpInterceptor {
 		storage.push(newUser);
 		this.localStorageService.setItem(STORAGE_USERS, storage);
 		this.localStorageService.setItem(STORAGE_LOGGED_IN, newUser.id);
-		return generateIsValidateObj(true, AUTH_RESPONSE_MESSAGES.registerSuccess);
+		return generateIsValidateObj(AUTH_RESPONSE_MESSAGES.registerSuccess);
 	}
 
 	//----------------------------------------------------------------------------//

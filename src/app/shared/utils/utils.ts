@@ -4,7 +4,8 @@ import { Observable, of } from 'rxjs';
 import { IValidate } from '../types/validate.type';
 import { LoginUser, RegisterUser } from '../types/user.type';
 
-export const generateIsValidateObj = (status: boolean, message: string): IValidate => {
+export const generateIsValidateObj = (message: string): IValidate => {
+	const status = message ? true : false;
 	return { status, message };
 };
 
