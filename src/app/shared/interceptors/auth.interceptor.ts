@@ -51,7 +51,7 @@ export class AuthInterceptor implements HttpInterceptor {
 	}
 
 	private checkUser(user: LoginUser | RegisterUser): IValidate {
-		const storage: User[] = this.localStorageService.getItem(STORAGE_USERS) as User[];
+		const storage: User[] = this.localStorageService.getItem<User[]>(STORAGE_USERS);
 
 		if (storage.length > 0) {
 			for (let i = 0; i < storage.length; i++) {

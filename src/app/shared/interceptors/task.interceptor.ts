@@ -45,14 +45,14 @@ export class TaskInterceptor implements HttpInterceptor {
 	// Tasks
 
 	private getTasks(): Observable<HttpEvent<Task[]>> {
-		const loggedIn = this.localStorageService.getItem(STORAGE_LOGGED_IN) as number;
-		const storage = this.localStorageService.getItem(STORAGE_TASKS) as Task[];
+		const loggedIn = this.localStorageService.getItem<number>(STORAGE_LOGGED_IN);
+		const storage = this.localStorageService.getItem<Task[]>(STORAGE_TASKS);
 		return of(new HttpResponse<Task[]>({ status: 200, body: storage.filter(task => task.ownerId === loggedIn) }));
 	}
 
 	private createTask(task: CreateTask): Observable<HttpEvent<IValidate>> {
-		const loggedIn = this.localStorageService.getItem(STORAGE_LOGGED_IN) as number;
-		const storage = this.localStorageService.getItem(STORAGE_TASKS) as Task[];
+		const loggedIn = this.localStorageService.getItem<number>(STORAGE_LOGGED_IN);
+		const storage = this.localStorageService.getItem<Task[]>(STORAGE_TASKS);
 		const newTask: Task = { ...task, id: Date.now(), ownerId: loggedIn };
 		storage.push(newTask);
 		this.localStorageService.setItem(STORAGE_TASKS, storage);
@@ -60,7 +60,7 @@ export class TaskInterceptor implements HttpInterceptor {
 	}
 
 	private updateTask(task: EditTask): Observable<HttpEvent<IValidate>> {
-		const storage = this.localStorageService.getItem(STORAGE_TASKS) as Task[];
+		const storage = this.localStorageService.getItem<Task[]>(STORAGE_TASKS);
 		const index = storage.findIndex(storageTask => storageTask.id === task.id);
 		const editedTask: Task = { ...task, name: storage[index].name, ownerId: storage[index].ownerId };
 		storage[index] = editedTask;
@@ -69,7 +69,7 @@ export class TaskInterceptor implements HttpInterceptor {
 	}
 
 	private deleteTask(id: number): Observable<HttpEvent<IValidate>> {
-		const storage = this.localStorageService.getItem(STORAGE_TASKS) as Task[];
+		const storage = this.localStorageService.getItem<Task[]>(STORAGE_TASKS);
 		const index = storage.findIndex(task => task.id === id);
 		storage.splice(index, 1);
 		this.localStorageService.setItem(STORAGE_TASKS, storage);

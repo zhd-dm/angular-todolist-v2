@@ -45,12 +45,12 @@ export class CategoryInterceptor implements HttpInterceptor {
 	// Categories
 
 	private getCategories(): Observable<HttpEvent<Category[]>> {
-		const storage = this.localStorageService.getItem(STORAGE_CATEGORIES) as Category[];
+		const storage = this.localStorageService.getItem<Category[]>(STORAGE_CATEGORIES);
 		return of(new HttpResponse<Category[]>({ status: 200, body: storage }));
 	}
 
 	private createCategory(category: CreateCategory): Observable<HttpEvent<IValidate>> {
-		const storage = this.localStorageService.getItem(STORAGE_CATEGORIES) as Category[];
+		const storage = this.localStorageService.getItem<Category[]>(STORAGE_CATEGORIES);
 		const newCategory = { ...category, id: Date.now() };
 		storage.push(newCategory);
 		this.localStorageService.setItem(STORAGE_CATEGORIES, storage);
@@ -58,7 +58,7 @@ export class CategoryInterceptor implements HttpInterceptor {
 	}
 
 	private updateCategory(category: EditCategory): Observable<HttpEvent<IValidate>> {
-		const storage = this.localStorageService.getItem(STORAGE_CATEGORIES) as Category[];
+		const storage = this.localStorageService.getItem<Category[]>(STORAGE_CATEGORIES);
 		const index = storage.findIndex(storageCategory => storageCategory.id === category.id);
 		storage[index] = category;
 		this.localStorageService.setItem(STORAGE_CATEGORIES, storage);
@@ -66,7 +66,7 @@ export class CategoryInterceptor implements HttpInterceptor {
 	}
 
 	private deleteCategory(id: number): Observable<HttpEvent<IValidate>> {
-		const storage = this.localStorageService.getItem(STORAGE_CATEGORIES) as Category[];
+		const storage = this.localStorageService.getItem<Category[]>(STORAGE_CATEGORIES);
 		const index = storage.findIndex(category => category.id === id);
 		storage.splice(index, 1);
 		this.localStorageService.setItem(STORAGE_CATEGORIES, storage);
